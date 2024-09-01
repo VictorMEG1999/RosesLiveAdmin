@@ -7,6 +7,34 @@
 
 import React from 'react';
 import type {PropsWithChildren} from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from 'react-native';
+
+const Stack = createNativeStackNavigator();
+
+function HomeScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text><Button
+        title="Go Settings"
+        onPress={() => navigation.navigate('Settings')}
+      />
+    </View>
+  );
+}
+function SettingsScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text><Button
+        title="Go Home"
+        onPress={() => navigation.navigate('Home')}
+      />
+    </View>
+  );
+}
+
+
 import {
   SafeAreaView,
   ScrollView,
@@ -55,7 +83,17 @@ function Section({children, title}: SectionProps): React.JSX.Element {
   );
 }
 
-function App(): React.JSX.Element {
+export default function App(): React.JSX.Element {
+
+  return(
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen}/>
+        <Stack.Screen name="Settings" component={SettingsScreen}/>
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -63,6 +101,7 @@ function App(): React.JSX.Element {
   };
 
   return (
+    
     <SafeAreaView style={backgroundStyle}>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
@@ -115,4 +154,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+
