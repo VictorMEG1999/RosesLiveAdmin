@@ -1,157 +1,141 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React, {useState} from 'react';
 
-import React from 'react';
+import {
+ View, ScrollView,
+ StyleSheet, TextInput,
+ Button,
+ SafeAreaView,
+ StatusBar,
+ Text,
+ useColorScheme,
+} from 'react-native';
+// conecion de firebase
+import firebase from './App/controller/firebase'
+
 import type {PropsWithChildren} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Button } from 'react-native';
+import {
+  Colors,DebugInstructions,
+  Header,LearnMoreLinks,
+  ReloadInstructions,
+} from 'react-native/Libraries/NewAppScreen';
 
 const Stack = createNativeStackNavigator();
 
 function HomeScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text><Button
-        title="Go Settings"
-        onPress={() => navigation.navigate('Settings')}
-      />
-    </View>
+    <ScrollView style={styles.conteinGrup}>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Home Screen</Text>
+        <Button title="Go Settings" onPress={() => navigation.navigate('Settings')}/>
+      </View>
+    </ScrollView>
+    
   );
 }
+
 function SettingsScreen({ navigation }) {
+
+  const [state, setState] = useState({
+    user:"",
+    emaill:"",
+    phone:"",
+  });
+  //  metodo de acptura de datos de los TextBox
+  const handleChangeText = (name, value) =>{
+    setState({...state,[name]:value})
+  }
+
+  const saveNewUser = async () =>{
+
+    // balidacino de capmos 
+    // if(state.user==="" || state.emaill==="" || state.phone===""){
+    //   alert("Faltan datos")
+    // }else{
+      try {
+        await firebase.db.collection('usuarios').add({
+        name:state.user,
+        emaill:state.emaill,
+        phone:state.phone,
+      })
+      alert("save user");
+      
+      } catch (e) {
+        console.log(e);
+        
+      }
+    // }
+
+  }
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text><Button
-        title="Go Home"
-        onPress={() => navigation.navigate('Home')}
-      />
-    </View>
+    <ScrollView style={styles.conteinGrup}>
+      <View style={styles.inputGroup}>
+        <TextInput style={styles.inputText} 
+          placeholder='Name user'
+          onChangeText={(value)=> handleChangeText('user',value)}
+          />
+      </View>
+      <View style={styles.inputGroup}>
+        <TextInput style={styles.inputText} 
+          onChangeText={(value)=> handleChangeText('emaill',value)}
+          placeholder='E-maill user'
+          />
+      </View>
+      <View style={styles.inputGroup}>
+        <TextInput style={styles.inputText} 
+          placeholder='Phone user'
+          onChangeText={(value)=> handleChangeText('phone',value)}
+          />
+      </View>
+      <View>
+        <Button title='save user' onPress={()=> saveNewUser()} />
+      </View>
+
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Home Screen</Text>
+        <Button title="Go Home" onPress={() => navigation.navigate('Home')}/>
+      </View>
+    </ScrollView>
+
+   
   );
 }
 
 
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+// import firestore from '@react-native-firebace/firebace'
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+function App() {
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
-export default function App(): React.JSX.Element {
-
+  
   return(
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen}/>
-        <Stack.Screen name="Settings" component={SettingsScreen}/>
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={HomeScreen}/>
+      <Stack.Screen name="Settings" component={SettingsScreen}/>
+    </Stack.Navigator>
+  </NavigationContainer>
+  )
 }
 
+
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+
+  inputText: {
+    backgroundColor:"#058066",
+    color:'white',
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  inputGroup:{
+    flex: 1,
+    padding: 0,
+    marginBottom:15,
+    borderBottomWidth:1,
+    borderBottomColor: '#ccc'
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
+  conteinGrup:{
+    flex:1,
+    padding:30,
+  }
 });
 
-
+export default App;
