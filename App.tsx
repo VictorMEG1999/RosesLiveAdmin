@@ -4,15 +4,39 @@ import {
  View, ScrollView,
  StyleSheet, TextInput,
  Button,
+ SafeAreaView,
+ StatusBar,
+ Text,
+ useColorScheme,
 } from 'react-native';
 // conecion de firebase
 import firebase from './App/controller/firebase'
 
-// import firestore from '@react-native-firebace/firebace'
+import type {PropsWithChildren} from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  Colors,DebugInstructions,
+  Header,LearnMoreLinks,
+  ReloadInstructions,
+} from 'react-native/Libraries/NewAppScreen';
 
-function App() {
+const Stack = createNativeStackNavigator();
 
-  // inicialisacion de estado 
+function HomeScreen({ navigation }) {
+  return (
+    <ScrollView style={styles.conteinGrup}>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Home Screen</Text>
+        <Button title="Go Settings" onPress={() => navigation.navigate('Settings')}/>
+      </View>
+    </ScrollView>
+    
+  );
+}
+
+function SettingsScreen({ navigation }) {
+
   const [state, setState] = useState({
     user:"",
     emaill:"",
@@ -30,14 +54,12 @@ function App() {
     //   alert("Faltan datos")
     // }else{
       try {
-      
-      alert("h1");
         await firebase.db.collection('usuarios').add({
         name:state.user,
         emaill:state.emaill,
         phone:state.phone,
       })
-      alert("h2");
+      alert("save user");
       
       } catch (e) {
         console.log(e);
@@ -46,23 +68,22 @@ function App() {
     // }
 
   }
-
-  return(
+  return (
     <ScrollView style={styles.conteinGrup}>
       <View style={styles.inputGroup}>
-        <TextInput 
+        <TextInput style={styles.inputText} 
           placeholder='Name user'
           onChangeText={(value)=> handleChangeText('user',value)}
           />
       </View>
       <View style={styles.inputGroup}>
-        <TextInput 
+        <TextInput style={styles.inputText} 
           onChangeText={(value)=> handleChangeText('emaill',value)}
           placeholder='E-maill user'
           />
       </View>
       <View style={styles.inputGroup}>
-        <TextInput 
+        <TextInput style={styles.inputText} 
           placeholder='Phone user'
           onChangeText={(value)=> handleChangeText('phone',value)}
           />
@@ -70,24 +91,40 @@ function App() {
       <View>
         <Button title='save user' onPress={()=> saveNewUser()} />
       </View>
+
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Home Screen</Text>
+        <Button title="Go Home" onPress={() => navigation.navigate('Home')}/>
+      </View>
     </ScrollView>
+
+   
+  );
+}
+
+
+// import firestore from '@react-native-firebace/firebace'
+
+function App() {
+
+  
+  return(
+    <NavigationContainer>
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={HomeScreen}/>
+      <Stack.Screen name="Settings" component={SettingsScreen}/>
+    </Stack.Navigator>
+  </NavigationContainer>
   )
 }
 
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 50,
-  },
-  bigBlue: {
-    color: 'blue',
-    fontWeight: 'bold',
-    fontSize: 30,
-  },
-  red: {
-    color: 'red',
-  },
 
+  inputText: {
+    backgroundColor:"#058066",
+    color:'white',
+  },
   inputGroup:{
     flex: 1,
     padding: 0,
