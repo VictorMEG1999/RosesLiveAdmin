@@ -1,7 +1,7 @@
 import React from 'react';
 import { NativeBaseProvider } from 'native-base';
 import { WarningOutlineIcon } from 'native-base';
-import { Center, Box, Heading, VStack, FormControl, Input, Button, HStack, Text, Checkbox } from 'native-base';
+import { Center, Box, Heading, VStack, FormControl, Input, Button } from 'native-base';
 
 export default function LoginScreen() {
   return (
@@ -17,32 +17,34 @@ export default function LoginScreen() {
               borderRadius="full"
               mb={5}
             />
-          </Center>  
+          </Center>
+          
           <Heading size="lg" fontWeight="600" color="coolGray.800" textAlign="center">
-            Iniciar Sesión
+          Registrate ingresando los siguientes datos y divierte conociendo personas
           </Heading>
 
           <VStack space={3} mt="5">
+
             <FormControl>
+              <FormControl.Label>Nombre</FormControl.Label>
+              <Input borderColor="pink.500" />
               <FormControl.Label>Correo</FormControl.Label>
               <Input borderColor="pink.500" />
+              <FormControl.Label>Correo</FormControl.Label>
+              <Input borderColor="pink.500" />
+              <FormControl.Label>Contraseña</FormControl.Label>
+              <Input type="password" borderColor="pink.500" />
+              <FormControl.Label>Confirmar Contraseña</FormControl.Label>
+              <Input type="password" borderColor="pink.500" />
             </FormControl>
+
             <FormControl>
               <FormControl.Label>Contraseña</FormControl.Label>
               <Input type="password" borderColor="pink.500" />
-              <HStack justifyContent="space-between" mt="2">
-                <Checkbox value="rememberMe" colorScheme="pink">Recordarme</Checkbox>
-                <Text underline color="coolGray.600">
-                  Recuperar Contraseña
-                </Text>
-              </HStack>
             </FormControl>
-            
+
             {/* Botones */}
-            <VStack space={2} mt="5">
-              <Button mt="2" colorScheme="pink" bgColor="pink.500">
-                Iniciar Sesión
-              </Button>
+            <VStack  mt="5">
               <Button mt="2" colorScheme="pink" bgColor="pink.500">
                 Crear Cuenta
               </Button>

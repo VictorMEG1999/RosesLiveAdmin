@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { NativeBaseProvider } from 'native-base';
 import { WarningOutlineIcon } from 'native-base';
@@ -17,7 +18,8 @@ export default function LoginScreen() {
               borderRadius="full"
               mb={5}
             />
-          </Center>  
+          </Center>
+          
           <Heading size="lg" fontWeight="600" color="coolGray.800" textAlign="center">
             Iniciar Sesión
           </Heading>
