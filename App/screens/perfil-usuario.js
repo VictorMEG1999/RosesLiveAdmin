@@ -12,15 +12,6 @@ export default function perfilusu() {
   
   return (
     <NativeBaseProvider>
-
-      <Center w="100%" flex={1} bgColor="white">
-        <Box safeArea p="2" w="90%" maxW="290" py="8" bg="white" borderRadius="lg" shadow="5">
-          
-          <Text>welcome</Text>
-
-        </Box>
-      </Center>
-
      <Center>
      <Image size={150} alt="fallback text" borderRadius={100} source={{
       uri: "https://-page-icon.png"
@@ -64,6 +55,7 @@ export default function perfilusu() {
           </Pressable>
         </HStack>
       </Box>
+
     </NativeBaseProvider>
   );
 }
