@@ -3,6 +3,7 @@ import { NavigationContainer, NavigationContainerRef } from '@react-navigation/n
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {LoginScreen} from"./App/screens/Login"
 import {registro_usuario} from"./App/screens/registro-usuario"
+import {napUser} from"./App/navigation/index"
 //import CountainerRoutes from './App/navigation';
 
 //function App() {
@@ -30,12 +31,8 @@ const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName='Login'>
-        <Stack.Screen name="Home" component={LoginScreen} />
-        <Stack.Screen name= "registro-usuario" component= {registro_usuario} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    napUser()
   );
 }
 export default App;
+

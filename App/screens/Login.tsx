@@ -7,10 +7,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
-const Stack = createNativeStackNavigator ();
+const nabegator = createNativeStackNavigator ();
 
 
-export  function LoginScreen({ navigation }) {
+export  function LoginScreen({navigation}) {
+  const push = () =>{
+    navigation.navigate('registro_usuario')
+  }
   return (
     <NativeBaseProvider>
       <Center w="100%" flex={1} bgColor="white">
@@ -45,7 +48,7 @@ export  function LoginScreen({ navigation }) {
               <Button onPress={() => {}} mt="2" borderRadius={60} bgColor="#E01983">
                 Iniciar Sesión
               </Button>
-              <Button onPress={() => navigation.navigate('registro_usuario,navigation')} mt="2" borderRadius={60} bgColor="#E01983">
+              <Button onPress={() => {push()}} mt="2" borderRadius={60} bgColor="#E01983">
                 Crear Cuenta
               </Button>
             </VStack>
