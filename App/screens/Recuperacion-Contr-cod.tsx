@@ -1,8 +1,14 @@
 import React from 'react';
 import { FormControl, HStack, NativeBaseProvider } from 'native-base';
 import { Center, VStack, Input, Button, Text } from 'native-base';
+import { useNavigation } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default function LoginScreen() {
+
+const Stack = createNativeStackNavigator ();
+
+export  function Recuperacion_Contr_cod() {
   return (
     <NativeBaseProvider>
       {/* Título */}
@@ -25,8 +31,7 @@ export default function LoginScreen() {
                 Crear Cuenta
             </Button>
         </VStack> 
-      </Center>
-        
+      </Center>    
     </NativeBaseProvider>
   );
 }

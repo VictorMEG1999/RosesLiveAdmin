@@ -1,7 +1,14 @@
 import React from 'react';
 import { NativeBaseProvider } from 'native-base';
 import { Center, Box, Heading, VStack, FormControl, Input, Button, HStack,  Text, Checkbox } from 'native-base';
-export default function LoginScreen() {
+import { useNavigation } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+
+const Stack = createNativeStackNavigator ();
+
+export  function registro_usuario() {
   return (
     <NativeBaseProvider>
       <Center w="100%" flex={1} bgColor="white">

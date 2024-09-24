@@ -1,9 +1,15 @@
 import React from 'react';
 import { FormControl, NativeBaseProvider } from 'native-base';
 import { Center, Box, VStack, Input, Button, Text } from 'native-base';
+import { useNavigation } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default function LoginScreen() {
-  return (
+
+const Stack = createNativeStackNavigator ();
+
+export  function Recuperacion_con() {
+  return (  
     <NativeBaseProvider>
       {/* Título */}
       <Text fontSize="lg" textAlign="center" mt={156} mb={4}>
@@ -19,8 +25,7 @@ export default function LoginScreen() {
             </Button>
             </FormControl>
         </VStack> 
-      </Center>
-        
+      </Center>       
     </NativeBaseProvider>
   );
 }
