@@ -1,9 +1,6 @@
 import React from 'react';
 import { NativeBaseProvider } from 'native-base';
 import { Center, Box, Heading, VStack, FormControl, Input, Button, HStack,  Text, Checkbox } from 'native-base';
-import { Image } from 'react-native-svg';
-import { useNavigation } from '@react-navigation/native';
-import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
@@ -48,7 +45,7 @@ export  function LoginScreen({navigation}) {
               <Button onPress={() => {}} mt="2" borderRadius={60} bgColor="#E01983">
                 Iniciar Sesión
               </Button>
-              <Button onPress={() => {push()}} mt="2" borderRadius={60} bgColor="#E01983">
+              <Button onPress={() => {}} mt="2" borderRadius={60} bgColor="#E01983">
                 Crear Cuenta
               </Button>
             </VStack>
