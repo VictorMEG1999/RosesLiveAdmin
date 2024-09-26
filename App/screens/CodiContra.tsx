@@ -8,7 +8,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator ();
 
-export default function CodiContra() {
+export function CodiContra({navigation}) {
   return (
     <NativeBaseProvider>
       <Center w={"100%"} flex={1} bg="white">
@@ -34,7 +34,7 @@ export default function CodiContra() {
 
       {/* Boton*/}
       <VStack w={"90%"} marginTop={5} space={4} marginBottom={3} mt="5">
-        <Button mt="2" borderRadius={60} bg="#E01983" colorScheme="pink" onPress={() => {}}>
+        <Button mt="2" borderRadius={60} bg="#E01983" colorScheme="pink" onPress={() => {navigation.navigate('CambContra')}}>
           Crear cuenta
         </Button>
       </VStack>

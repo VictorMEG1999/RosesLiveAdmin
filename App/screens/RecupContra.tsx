@@ -8,7 +8,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator ();
 
-export default function RecupContra() {
+export function RecupContra({navigation}) {
   return (
     <NativeBaseProvider>
       <Center width={"100%"} flex={1} bg="white">
@@ -22,7 +22,7 @@ export default function RecupContra() {
           <FormControl>
             <Text mt={2}>Correo</Text>
             <Input borderRadius={10} borderColor={"#E01983"} mt="2" ></Input>
-            <Button backgroundColor={"#E01983"} borderRadius={25} onPress={() => {}} mt={5} shadow="5"  >
+            <Button backgroundColor={"#E01983"} borderRadius={25} onPress={() => {navigation.navigate('CodiContra')}} mt={5} shadow="5"  >
               Enviar
             </Button>
           </FormControl>

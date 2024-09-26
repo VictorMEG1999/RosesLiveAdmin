@@ -1,7 +1,10 @@
 import React from 'react';
 import { FormControl, NativeBaseProvider, Center, Heading, VStack, Input, Button, Text} from 'native-base';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default function CambContra() {
+
+const Stack = createNativeStackNavigator ();
+export  function CambContra({navigation}) {
   return (
     <NativeBaseProvider>
       <Center w="100%" flex={1} bg="white">
@@ -16,7 +19,7 @@ export default function CambContra() {
             <Text mt={2}>Confirma tu nueva contraseña</Text>
             <Input borderRadius={10} type='password' borderColor={"#E01983"} mt="2" ></Input>
             
-            <Button backgroundColor={"#E01983"} borderRadius={25} onPress={() => {}} mt={5} shadow="5"  >
+            <Button backgroundColor={"#E01983"} borderRadius={25} onPress={() => {navigation.navigate('LoginScreen')}} mt={5} shadow="5"  >
               Confirmar
             </Button>
             </FormControl>
