@@ -1,11 +1,11 @@
-import React from 'react';
+/*import React from 'react';
 import { NavigationContainer, NavigationContainerRef } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {LoginScreen} from"./App/screens/Login"
-import {registro_usuario} from"./App/screens/registro-usuario"
+import {registro-usuario} from"./App/screens/registro-usuario"
 import {napUser} from"./App/navigation/index"
 //import CountainerRoutes from './App/navigation';
-
+*/
 //function App() {
   //return 
     //<CountainerRoutes/>;  
@@ -35,4 +35,3 @@ function App() {
   );
 }
 export default App;
-
