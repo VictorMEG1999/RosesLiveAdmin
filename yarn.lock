@@ -2419,6 +2419,11 @@
     "@react-aria/ssr" "^3.0.1"
     "@react-aria/utils" "^3.3.0"
 
+"@react-native-community/blur@^4.4.1":
+  version "4.4.1"
+  resolved "https://registry.npmjs.org/@react-native-community/blur/-/blur-4.4.1.tgz"
+  integrity sha512-XBSsRiYxE/MOEln2ayunShfJtWztHwUxLFcSL20o+HNNRnuUDv+GXkF6FmM2zE8ZUfrnhQ/zeTqvnuDPGw6O8A==
+
 "@react-native-community/cli-clean@14.1.0":
   version "14.1.0"
   resolved "https://registry.npmjs.org/@react-native-community/cli-clean/-/cli-clean-14.1.0.tgz"
