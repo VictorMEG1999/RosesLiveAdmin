@@ -6,6 +6,8 @@ import {RegisUsua} from"../screens/RegisUsua"
 import {RecupContra} from "../screens/RecupContra"
 import {CodiContra} from "../screens/CodiContra"
 import {CambContra} from "../screens/CambContra"
+import {LoginScreen} from"../screens/Login"
+import {registro_usuario} from"../screens/RegistroUsuario"
 //import CountainerRoutes from './App/navigation';
 
 
