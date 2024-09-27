@@ -7,13 +7,16 @@ import { NativeBaseProvider, Center, Box, Heading,
 import {checTex,login } from "../controller/login_controler"
 
 
-export  function LoginScreen({navigation}) {
+export function LoginScreen({navigation}) {
   // declaracion de validabes
   const [state, setState] = useState({
     email:"",
     pass:"",
     }
   );
+
+const [showModal, setShowModal] = useState(false);
+const [modalMessage, setModalMessage] = useState('');
 
   const handleChangeText = ( name: string, value: string, ) =>{
     setState({...state,[name]:value})
@@ -38,7 +41,7 @@ export  function LoginScreen({navigation}) {
       console.log("email ", checEmail ," pass ",checPass);
       const idUserLog = await login(state.email,state.pass)
       console.log("resultado = ",idUserLog);
-      setModalMessage("Inicio de sesión exitoso.");
+      
     }
   }
   return (
