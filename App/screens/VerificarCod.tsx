@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FormControl, HStack, NativeBaseProvider, Modal, Box } from 'native-base';
 import { Center, VStack, Input, Button, Text, Heading } from 'native-base';
 
-export default function CodiContra() {
+export  function VerificarCod({navigation}) {
   const [code, setCode] = useState(["", "", "", "", "", ""]);
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
@@ -10,7 +10,7 @@ export default function CodiContra() {
   const validCode = "123456"; // Código fijo de ejemplo para la validación
 
   // Función para manejar el cambio en los inputs
-  const handleChange = (value, index) => {
+  const handleChange = (value: string, index: number) => {
     const newCode = [...code];
     newCode[index] = value;
     setCode(newCode);
@@ -22,6 +22,7 @@ export default function CodiContra() {
 
     if (enteredCode === validCode) {
       setModalMessage("Código válido, cuenta verificada con éxito.");
+      navigation.navigate('CambContra')
     } else {
       setModalMessage("Código incorrecto, por favor inténtalo de nuevo.");
     }

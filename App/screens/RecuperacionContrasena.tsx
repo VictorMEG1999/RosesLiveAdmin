@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { FormControl, NativeBaseProvider, Center, VStack, Input, Button, Text, Modal } from 'native-base';
 
-export default function RecupContra() {
+export  function RecupContra({navigation}) {
   const [email, setEmail] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
 
   // Lista de correos de prueba
-  const validEmails = ["test@example.com", "usuario@correo.com", "admin@dominio.com"];
+  const validEmails = ["1","test@example.com", "usuario@correo.com", "admin@dominio.com"];
 
   const handleSubmit = () => {
     if (validEmails.includes(email)) {
       setModalMessage("El correo existe. Se ha enviado un enlace de recuperación.");
+      // naveegacion  
+      navigation.navigate('VerificarCod')
     } else {
       setModalMessage("El correo no existe en nuestra base de datos.");
     }

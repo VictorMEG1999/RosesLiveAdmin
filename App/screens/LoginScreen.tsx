@@ -15,33 +15,34 @@ export function LoginScreen({navigation}) {
     }
   );
 
-const [showModal, setShowModal] = useState(false);
-const [modalMessage, setModalMessage] = useState('');
-
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
+  // captura de datos
   const handleChangeText = ( name: string, value: string, ) =>{
     setState({...state,[name]:value})
   }
+
   const log_ins = async ()  =>{
 
     // comprobacion de campo email
-    const checEmail = checTex(state.email)
+    const checEmail = checTex(state.email, "email")
     if(checEmail){
-      console.log("ERROR campo correo ==>",checEmail);
+      setModalMessage("ERROR campo correo ==>"+checEmail);
       setShowModal(true); // Mostrar modal con el resultado
     }
 
     // comprobacion de dampo contraseña
-    const checPass = checTex(state.pass)
+    const checPass = checTex(state.pass, "email")
     if(checPass){
-      console.log("ERROR campo contraseña ==>",checPass);
+      setModalMessage("ERROR campo contraseña ==> "+checPass);
       setShowModal(true); // Mostrar modal con el resultado
     }
 
     if(!checEmail && !checPass){
-      console.log("email ", checEmail ," pass ",checPass);
       const idUserLog = await login(state.email,state.pass)
-      console.log("resultado = ",idUserLog);
-      
+      // retorna el id del usurio logueado que coninsida con los datos 
+      setModalMessage("resultado = "+idUserLog);
+      setShowModal(true); // Mostrar modal con el resultado
     }
   }
   return (
@@ -75,7 +76,7 @@ const [modalMessage, setModalMessage] = useState('');
           </FormControl>
           <HStack justifyContent="space-between" mt="2">
             <Checkbox value="rememberMe" colorScheme="pink">Recordarme</Checkbox>
-            <Text underline color="coolGray.600" onPress={() => {}}>
+            <Text underline color="coolGray.600" onPress={() => {navigation.navigate('RecupContra')}}>
               Recuperar Contraseña
             </Text>
           </HStack>

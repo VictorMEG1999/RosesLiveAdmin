@@ -3,7 +3,7 @@ import { FormControl, NativeBaseProvider,
        Center, Heading, VStack, Input, 
        Button, Text, Modal } from 'native-base';
 
-export default function CambContra() {
+export function CambContra({navigation}) {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showModal, setShowModal] = useState(false);
@@ -12,6 +12,7 @@ export default function CambContra() {
   const handleSubmit = () => {
     if (password === confirmPassword) {
       setModalMessage("Las contraseñas coinciden.");
+      navigation.navigate('LoginScreen')
     } else {
       setModalMessage("Las contraseñas no coiciden, intentalo nuevamente.");
     }
