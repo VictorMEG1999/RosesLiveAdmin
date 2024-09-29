@@ -7,6 +7,9 @@ import {RegisUsua} from"../screens/RegistroUsuario"
 import {RecupContra} from "../screens/RecuperacionContrasena"
 import {VerificarCod} from "../screens/VerificarCod"
 import {CambContra} from "../screens/CambiarContra"
+import {InicioUsuario} from "../screens/InicioUsuario"
+
+
 //import CountainerRoutes from './App/navigation';
 
 
@@ -22,6 +25,8 @@ export function napUser() {
         <Stack.Screen name= "RecupContra" component= {RecupContra} />
         <Stack.Screen name= "VerificarCod" component= {VerificarCod} />
         <Stack.Screen name= "CambContra" component= {CambContra} />
+        <Stack.Screen name= "InicioUsuario" component= {InicioUsuario} /*options={{ headerShown: false }}*//>
+
       </Stack.Navigator>
     </NavigationContainer>
   );
