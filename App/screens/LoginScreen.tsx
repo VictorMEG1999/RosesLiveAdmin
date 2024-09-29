@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
-import { NativeBaseProvider, Center, Box, Heading, VStack, FormControl, Input, Button, HStack, Text, Checkbox, Modal } from 'native-base';
-import { checTex, login } from "../controller/login_controler";
+import { NativeBaseProvider, Center, Box, Heading, VStack, FormControl,
+         Input, Button, HStack, Text, Checkbox, Modal } from 'native-base';
+import Svg, { Path } from 'react-native-svg';
+import { Dimensions } from 'react-native';
+import styles from '../styles/LoginScreenStyles';
+import { checTex, login } from "../controller/LoginControler";
+
+const { width } = Dimensions.get('window');
 
 export function LoginScreen({ navigation }) {
   const [state, setState] = useState({
@@ -47,50 +53,59 @@ export function LoginScreen({ navigation }) {
 
   return (
     <NativeBaseProvider>
-      <Center w="100%" flex={1} bgColor="white">
-        <Center>
-          <Box size={100} bgColor="gray.200" borderRadius="full" mb={5} />
-        </Center>
+      <Center style={styles.container}>
+        <VStack w="90%" maxW="400px" space={1} mt="180">
+            <Center>
+              <Box size={100} bgColor="gray.200" borderRadius="full" mb={5} />
+            </Center>
 
         <Heading size="lg" fontWeight="600" color="coolGray.800" textAlign="center">
           Iniciar Sesión
         </Heading>
 
-        <VStack width="90%" space={2} mt="5">
-          <FormControl>
-            <Text mt={2}>Correo</Text>
-            <Input
-              borderRadius={10}
-              borderColor={"#E01983"}
-              mt="2"
-              onChangeText={(value) => handleChangeText('email', value)}
-            />
-            <Text mt={2}>Contraseña</Text>
-            <Input
-              borderRadius={10}
-              borderColor={"#E01983"}
-              type="password"
-              mt="2"
-              onChangeText={(value) => handleChangeText('pass', value)}
-            />
-          </FormControl>
-          <HStack justifyContent="space-between" mt="2">
-            <Checkbox value="rememberMe" colorScheme="pink">Recordarme</Checkbox>
-            <Text underline color="coolGray.600" onPress={() => { navigation.navigate('RecupContra'); }}>
-              Recuperar Contraseña
-            </Text>
-          </HStack>
+        <VStack space={3} mt="5">
+                    <FormControl>
+                      <FormControl.Label>Correo</FormControl.Label>
+                      <Input
+                        style={styles.input}
+                        borderWidth={0}
+                        onChangeText={(value) => handleChangeText('email', value)}
+                      />
 
-          {/* Botones */}
-          <VStack space={2} mt="5">
-            <Button onPress={() => { log_ins(); }} mt="2" borderRadius={60} bgColor="#E01983">
-              Iniciar Sesión
-            </Button>
-            <Button onPress={() => { navigation.navigate('RegisUsua'); }} mt="2" borderRadius={60} bgColor="#E01983">
-              Crear Cuenta
-            </Button>
-          </VStack>
-        </VStack>
+                      <FormControl.Label>Contraseña</FormControl.Label>
+                      <Input
+                        type="password"
+                        style={styles.input}
+                        borderWidth={0}
+                        onChangeText={(value) => handleChangeText('pass', value)}
+                      />
+
+                      <HStack justifyContent="space-between" mt="3">
+                        <Checkbox value="rememberMe" colorScheme="pink">Recordarme</Checkbox>
+                        <Text underline color="coolGray.600" onPress={() => { navigation.navigate('RecupContra'); }}>
+                          Recuperar Contraseña
+                        </Text>
+                      </HStack>
+                    </FormControl>
+
+                    {/* Botones */}
+                    <VStack space={3} mt="5">
+                      <Button style={styles.button} _pressed={styles.buttonPressed}
+                        onPress={() => { log_ins(); }}>
+                        Iniciar Sesión
+                      </Button>
+                      <Button style={styles.button} _pressed={styles.buttonPressed}
+                        onPress={() => { navigation.navigate('RegisUsua'); }}>
+                        Crear Cuenta
+                      </Button>
+                    </VStack>
+                  </VStack>
+         </VStack>
+
+         {/* Imagen figura SVG */}
+                <Svg height="30%" width={width} viewBox="0 0 1440 350" style={styles.wave}>
+                  <Path fill="#E01983" d="M0,-20 C500,-200 1000,20 1440,-200 L1440,800 L0,800 Z" />
+                </Svg>
       </Center>
 
       {/* Modal personalizado */}

@@ -71,3 +71,14 @@ export async function login(email: String,pass: String) {
   }
    return e
 }
+
+export const checTexForm = (value, field) => {
+  // Validación del campo (correo o contraseña)
+  if (field === "email" && !/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(value)) {
+    return "El correo no es válido.";
+  }
+  if (field === "pass" && value.length < 6) {
+    return "La contraseña debe tener al menos 6 caracteres.";
+  }
+  return null; // Si es válido
+};
