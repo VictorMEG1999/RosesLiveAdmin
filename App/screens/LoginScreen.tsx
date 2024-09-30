@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { NativeBaseProvider, Center, Box, Heading, VStack, FormControl,
          Input, Button, HStack, Text, Checkbox, Modal } from 'native-base';
 import Svg, { Path } from 'react-native-svg';
-import { Dimensions } from 'react-native';
 import styles from '../styles/LoginScreenStyles';
 import { checTex, login } from "../controller/LoginControler";
+import { Dimensions } from 'react-native';
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 export function LoginScreen({ navigation }) {
   const [state, setState] = useState({

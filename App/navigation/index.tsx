@@ -25,7 +25,7 @@ export function napUser() {
         <Stack.Screen name= "RecupContra" component= {RecupContra} />
         <Stack.Screen name= "VerificarCod" component= {VerificarCod} />
         <Stack.Screen name= "CambContra" component= {CambContra} />
-        <Stack.Screen name= "InicioUsuario" component= {InicioUsuario} /*options={{ headerShown: false }}*//>
+        <Stack.Screen name= "InicioUsuario" component= {InicioUsuario} options={{ headerShown: false }}/*options={{ headerShown: false }}*//>
 
       </Stack.Navigator>
     </NavigationContainer>
