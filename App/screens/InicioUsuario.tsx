@@ -7,6 +7,10 @@ import LiveUsuarioTab from '../components/LiveUsuarioTab';
 import TopUsuarioTab from '../components/TopUsuarioTab';
 import PerfilUsuarioTab from '../components/PerfilUsuarioTab';
 import { NativeBaseProvider} from 'native-base';
+import styles from '../styles/InicioUsuarioStyles';
+import { Dimensions } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
 
 const Tab = createBottomTabNavigator();
 
@@ -18,28 +22,40 @@ export const InicioUsuario = () => {
            screenOptions={({ route }) => ({
              tabBarIcon: ({ color, size }) => {
                let iconName;
-               if (route.name === 'Inicio') {
-                 iconName = 'home-outline';
-               } else if (route.name === 'Fiesta') {
-                 iconName = 'beer-outline';
-               } else if (route.name === 'Live') {
-                 iconName = 'videocam-outline';
-               } else if (route.name === 'Top') {
-                 iconName = 'trophy-outline';
-               } else if (route.name === 'Perfil') {
-                 iconName = 'person-outline';
-               }
+                switch (route.name) {
+                             case 'Inicio':
+                               iconName = 'home-outline';
+                               break;
+                             case 'Fiesta':
+                               iconName = 'beer-outline';
+                               break;
+                             case 'Live':
+                               iconName = 'videocam-outline';
+                               break;
+                             case 'Top':
+                               iconName = 'trophy-outline';
+                               break;
+                             case 'Perfil':
+                               iconName = 'person-outline';
+                               break;
+                             default:
+                               iconName = 'home-outline';
+                           }
                return <Ionicons name={iconName} size={size} color={color} />;
              },
-             tabBarActiveTintColor: 'tomato',
-             tabBarInactiveTintColor: 'gray',
+             tabBarActiveTintColor: styles.tabBarActiveTintColor.color,
+             tabBarInactiveTintColor: styles.tabBarInactiveTintColor.color,
+             tabBarActiveBackgroundColor: styles.tabBarActiveBackgroundColor.color,
+             tabBarStyle: styles.tabBarStyle,
+             tabBarLabelStyle: styles.tabBarLabelStyle,
+             tabBarIconStyle: styles.tabBarIconStyle,
            })}
          >
-           <Tab.Screen name="Inicio" component={InicioUsuarioTab} />
-           <Tab.Screen name="Fiesta" component={InicioUsuarioTab} />
-           <Tab.Screen name="Live" component={LiveUsuarioTab} />
-           <Tab.Screen name="Top" component={TopUsuarioTab} />
-           <Tab.Screen name="Perfil" component={PerfilUsuarioTab} />
+           <Tab.Screen name="Inicio" component={InicioUsuarioTab} options={{ headerShown: false }}/>
+           <Tab.Screen name="Fiesta" component={FiestaUsuarioTab} options={{ headerShown: false }}/>
+           <Tab.Screen name="Live" component={LiveUsuarioTab} options={{ headerShown: false }}/>
+           <Tab.Screen name="Top" component={TopUsuarioTab} options={{ headerShown: false }}/>
+           <Tab.Screen name="Perfil" component={PerfilUsuarioTab} options={{ headerShown: false }}/>
          </Tab.Navigator>
 
 
