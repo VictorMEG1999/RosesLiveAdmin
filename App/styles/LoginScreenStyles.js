@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   input: {
     borderColor: '#E01983',
     borderWidth: 1,
-    borderRadius: 60,
+    borderRadius: 10,
     paddingHorizontal: 16,
     paddingVertical: 12,
     marginBottom: 10,
