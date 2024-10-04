@@ -77,3 +77,12 @@ const FiestaUsuarioTab = () => {
 export default FiestaUsuarioTab;
 
 
+/*<View style={styles.containerBuscador}>
+          {/* Aquí va el menú */}
+          <View style={styles.menu}>
+            <Text style={styles.menuText}>Menú aquí</Text>
+          </View>
+          {/* Aquí va el menú */}
+        </View>*/
+
+        

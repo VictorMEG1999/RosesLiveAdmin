@@ -2873,7 +2873,18 @@
     color "^4.2.3"
     warn-once "^0.1.0"
 
-"@react-stately/checkbox@^3.0.1", "@react-stately/checkbox@3.0.3":
+"@react-stately/checkbox@^3.0.1":
+  version "3.6.8"
+  resolved "https://registry.npmjs.org/@react-stately/checkbox/-/checkbox-3.6.8.tgz"
+  integrity sha512-c8TWjU67XHHBCpqj6+FXXhQUWGr2Pil1IKggX81pkedhWiJl3/7+WHJuZI0ivGnRjp3aISNOG8UNVlBEjS9E8A==
+  dependencies:
+    "@react-stately/form" "^3.0.5"
+    "@react-stately/utils" "^3.10.3"
+    "@react-types/checkbox" "^3.8.3"
+    "@react-types/shared" "^3.24.1"
+    "@swc/helpers" "^0.5.0"
+
+"@react-stately/checkbox@3.0.3":
   version "3.0.3"
   resolved "https://registry.npmjs.org/@react-stately/checkbox/-/checkbox-3.0.3.tgz"
   integrity sha512-amT889DTLdbjAVjZ9j9TytN73PszynGIspKi1QSUCvXeA2OVyCwShxhV0Pn7yYX8cMinvGXrjhWdhn0nhYeMdg==
@@ -2965,7 +2976,7 @@
     "@react-types/overlays" "^3.8.9"
     "@swc/helpers" "^0.5.0"
 
-"@react-stately/radio@^3.10.7":
+"@react-stately/radio@^3.10.7", "@react-stately/radio@^3.2.1":
   version "3.10.7"
   resolved "https://registry.npmjs.org/@react-stately/radio/-/radio-3.10.7.tgz"
   integrity sha512-ZwGzFR+sGd42DxRlDTp3G2vLZyhMVtgHkwv2BxazPHxPMvLO9yYl7+3PPNxAmhMB4tg2u9CrzffpGX2rmEJEXA==
@@ -2976,7 +2987,7 @@
     "@react-types/shared" "^3.24.1"
     "@swc/helpers" "^0.5.0"
 
-"@react-stately/radio@^3.2.1", "@react-stately/radio@3.2.1":
+"@react-stately/radio@3.2.1":
   version "3.2.1"
   resolved "https://registry.npmjs.org/@react-stately/radio/-/radio-3.2.1.tgz"
   integrity sha512-WGYMWCDJQOicFLf+bW2CbAnlRWaqsUd028WpsS41GWyIx/w7DVpUeGFwTSvyCXC5SCQZuambsWHgXNz8Ng5WIA==
@@ -3007,7 +3018,17 @@
     "@react-types/shared" "^3.24.1"
     "@swc/helpers" "^0.5.0"
 
-"@react-stately/slider@^3.0.1", "@react-stately/slider@3.0.1":
+"@react-stately/slider@^3.0.1", "@react-stately/slider@^3.5.7":
+  version "3.5.7"
+  resolved "https://registry.npmjs.org/@react-stately/slider/-/slider-3.5.7.tgz"
+  integrity sha512-gEIGTcpBLcXixd8LYiLc8HKrBiGQJltrrEGoOvvTP8KVItXQxmeL+JiSsh8qgOoUdRRpzmAoFNUKGEg2/gtN8A==
+  dependencies:
+    "@react-stately/utils" "^3.10.3"
+    "@react-types/shared" "^3.24.1"
+    "@react-types/slider" "^3.7.5"
+    "@swc/helpers" "^0.5.0"
+
+"@react-stately/slider@3.0.1":
   version "3.0.1"
   resolved "https://registry.npmjs.org/@react-stately/slider/-/slider-3.0.1.tgz"
   integrity sha512-gGpfdVbTmdsOvrmZvFx4hJ5b7nczvAWdHR/tFFJKfxH0/V8NudZ5hGnawY84R3x+OvgV+tKUfifEUKA+oJyG5w==
@@ -3017,16 +3038,6 @@
     "@react-aria/utils" "^3.6.0"
     "@react-stately/utils" "^3.2.0"
     "@react-types/slider" "^3.0.1"
-
-"@react-stately/slider@^3.5.7":
-  version "3.5.7"
-  resolved "https://registry.npmjs.org/@react-stately/slider/-/slider-3.5.7.tgz"
-  integrity sha512-gEIGTcpBLcXixd8LYiLc8HKrBiGQJltrrEGoOvvTP8KVItXQxmeL+JiSsh8qgOoUdRRpzmAoFNUKGEg2/gtN8A==
-  dependencies:
-    "@react-stately/utils" "^3.10.3"
-    "@react-types/shared" "^3.24.1"
-    "@react-types/slider" "^3.7.5"
-    "@swc/helpers" "^0.5.0"
 
 "@react-stately/tabs@3.0.0-alpha.0":
   version "3.0.0-alpha.0"
@@ -3048,15 +3059,14 @@
     "@react-stately/utils" "^3.2.0"
     "@react-types/tabs" "3.0.0-alpha.2"
 
-"@react-stately/toggle@^3.2.1", "@react-stately/toggle@3.2.1":
-  version "3.2.1"
-  resolved "https://registry.npmjs.org/@react-stately/toggle/-/toggle-3.2.1.tgz"
-  integrity sha512-gZVuJ8OYoATUoXzdprsyx6O1w3wCrN+J0KnjhrjjKTrBG68n3pZH0p6dM0XpsaCzlSv0UgNa4fhHS3dYfr/ovw==
+"@react-stately/toggle@^3.2.1", "@react-stately/toggle@^3.7.7":
+  version "3.7.7"
+  resolved "https://registry.npmjs.org/@react-stately/toggle/-/toggle-3.7.7.tgz"
+  integrity sha512-AS+xB4+hHWa3wzYkbS6pwBkovPfIE02B9SnuYTe0stKcuejpWKo5L3QMptW0ftFYsW3ZPCXuneImfObEw2T01A==
   dependencies:
-    "@babel/runtime" "^7.6.2"
-    "@react-stately/utils" "^3.1.1"
-    "@react-types/checkbox" "^3.2.1"
-    "@react-types/shared" "^3.2.1"
+    "@react-stately/utils" "^3.10.3"
+    "@react-types/checkbox" "^3.8.3"
+    "@swc/helpers" "^0.5.0"
 
 "@react-stately/toggle@^3.2.3":
   version "3.7.7"
@@ -3067,14 +3077,15 @@
     "@react-types/checkbox" "^3.8.3"
     "@swc/helpers" "^0.5.0"
 
-"@react-stately/toggle@^3.7.7":
-  version "3.7.7"
-  resolved "https://registry.npmjs.org/@react-stately/toggle/-/toggle-3.7.7.tgz"
-  integrity sha512-AS+xB4+hHWa3wzYkbS6pwBkovPfIE02B9SnuYTe0stKcuejpWKo5L3QMptW0ftFYsW3ZPCXuneImfObEw2T01A==
+"@react-stately/toggle@3.2.1":
+  version "3.2.1"
+  resolved "https://registry.npmjs.org/@react-stately/toggle/-/toggle-3.2.1.tgz"
+  integrity sha512-gZVuJ8OYoATUoXzdprsyx6O1w3wCrN+J0KnjhrjjKTrBG68n3pZH0p6dM0XpsaCzlSv0UgNa4fhHS3dYfr/ovw==
   dependencies:
-    "@react-stately/utils" "^3.10.3"
-    "@react-types/checkbox" "^3.8.3"
-    "@swc/helpers" "^0.5.0"
+    "@babel/runtime" "^7.6.2"
+    "@react-stately/utils" "^3.1.1"
+    "@react-types/checkbox" "^3.2.1"
+    "@react-types/shared" "^3.2.1"
 
 "@react-stately/tree@^3.8.4":
   version "3.8.4"
@@ -3350,10 +3361,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^18.2.6", "@types/react@^18.3.9":
-  version "18.3.9"
-  resolved "https://registry.npmjs.org/@types/react/-/react-18.3.9.tgz"
-  integrity sha512-+BpAVyTpJkNWWSSnaLBk6ePpHLOGJKnEQNbINNovPWzvEUyAe3e+/d494QdEh71RekM/qV7lw6jzf1HGrJyAtQ==
+"@types/react@*", "@types/react@^18.2.6", "@types/react@^18.3.10":
+  version "18.3.10"
+  resolved "https://registry.npmjs.org/@types/react/-/react-18.3.10.tgz"
+  integrity sha512-02sAAlBnP39JgXwkAq3PeU9DVaaGpZyF3MGcC0MKgQVkZor5IiiDAipVaxQHtDJAmO4GIy/rVBy/LzVj76Cyqg==
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.0.2"
