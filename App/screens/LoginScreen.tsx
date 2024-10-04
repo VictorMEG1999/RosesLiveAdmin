@@ -3,7 +3,7 @@ import { NativeBaseProvider, Center, Box, Heading, VStack, FormControl,
          Input, Button, HStack, Text, Checkbox, Modal } from 'native-base';
 import Svg, { Path } from 'react-native-svg';
 import styles from '../styles/LoginScreenStyles';
-import { checTex, login } from "../controller/LoginControler";
+import { checTex, login } from "../controller/LoginController";
 import { Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
@@ -18,7 +18,7 @@ export function LoginScreen({ navigation }) {
   const [modalMessage, setModalMessage] = useState('');
 
   // Captura de datos
-  const handleChangeText = (name, value) => {
+  const handleChangeText = (name: string, value: string) => {
     setState({ ...state, [name]: value });
   };
 

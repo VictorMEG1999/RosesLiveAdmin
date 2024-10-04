@@ -82,7 +82,30 @@ export async function search (campo: string,valorvalue: string) {
         nombre : nombre,
         numerosStream :numerosStream,
         email :email,
-        pass : pass
+        pass : pass,
+        agente : false,
+        apellido:"Live", // falta en el formulario
+        borrado:false,
+        cuota:0,
+        estado:true,
+        fechaRregistro: Date().toLocaleString(),// fecha del sistema 
+        followNumero:0,
+        follower:0,
+        gestion:0,
+        idUsuarioModificador:"",
+        idioma:["español"],
+        ingreso:0,
+        lada:0,// definir ubicacion
+        moderador:0,
+        monto:0,
+        nickName:nombre,
+        permiso:true,
+        personaRegalaMas:"",
+        sAdmin:false,
+        ultimaFechaEntrada:Date().toLocaleString(),// fecha del sistema 
+        ultimaFechaModificacion:Date().toLocaleString(),// fecha del sistema 
+        verificado:true,
+        // revisa el nombre de los campos pofa porque alguinos tiene giones (se lo quiite ne la pureba)
       });
       return docRef 
   }

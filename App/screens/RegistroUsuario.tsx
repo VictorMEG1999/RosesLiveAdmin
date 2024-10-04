@@ -3,7 +3,7 @@ import { NativeBaseProvider, Center, Box, Heading, VStack,
         FormControl, Input, Button, KeyboardAvoidingView, 
         Text, ScrollView,Modal } from 'native-base';
 
-import {checTex,search,SalveUserData} from "../controller/registro-usuario"
+import {checTex,search,SalveUserData} from "../controller/RegistroUsuarioController"
 
 export  function RegisUsua() {
 

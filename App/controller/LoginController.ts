@@ -1,6 +1,6 @@
 import firebase from "./firebase"
-import { collection , query, where, getDocs } from "firebase/firestore";
-
+import { collection , query, where, getDocs, doc,updateDoc } from "firebase/firestore";
+import * as varGlobal from "./variablesglobales"
   // validacion y texto
   export const checTex =  (text: String, type:String) =>{
     
@@ -62,23 +62,62 @@ export async function login(email: String,pass: String) {
     // construccionde consulta
     const q = query(collection(firebase.db, "usuario"), where("email", "==", email), where("pass", "==", pass));
     const querySnapshot = await getDocs(q)
+    const docs = []
     // recorido de resultados
-    querySnapshot.forEach((doc) => {
-      e= doc.id ;
+    querySnapshot.forEach((info) => {
+
+// varGlobal.idUser = info.data().info.id
+// varGlobal.nombre = info.data().nombre
+// varGlobal.numerosStream = info.data().numerosStream
+// varGlobal.email = info.data().email
+// varGlobal.pass = info.data().pass
+// varGlobal.agente = info.data().agente
+// varGlobal.apellido = info.data().apellido
+// varGlobal.borrado = info.data().borrado
+// varGlobal.cuota = info.data().cuota
+// varGlobal.estado = info.data().estado
+// varGlobal.fechaRregistro = info.data().fechaRregistro
+// varGlobal.followNumero = info.data().followNumero
+// varGlobal.follower = info.data().follower
+// varGlobal.gestion = info.data().gestion
+// varGlobal.idUsuarioModificador = info.data().idUsuarioModificador
+// varGlobal.idioma = info.data().idioma
+// varGlobal.ingreso = info.data().ingreso
+// varGlobal.lada = info.data().lada
+// varGlobal.moderador = info.data().moderador
+// varGlobal.monto = info.data().monto
+// varGlobal.nickName = info.data().nickName
+// varGlobal.permiso = info.data().permiso
+// varGlobal.personaRegalaMas = info.data().personaRegalaMas
+// varGlobal.sAdmin = info.data().sAdmin
+// varGlobal.ultimaFechaEntrada = info.data().ultimaFechaEntrada
+// varGlobal.ultimaFechaModificacion = info.data().ultimaFechaModificacion
+// varGlobal.verificado = info.data().verificado
+      
+      e= info.id ;
     });
+    if(e) {
+      // actualisa fecha de ultima conexion 
+      // referencia usuario ERORR por el tipo de dato id del usario "e"
+      const idUserRef = doc(firebase.db, "usuario", e );
+      // update campo 
+      const rest = await updateDoc(idUserRef, {
+        ultimaFechaEntrada: Date().toLocaleString()
+      });
+    }
   } catch (e) {
     console.log(e);
   }
    return e
 }
 
-export const checTexForm = (value, field) => {
-  // Validación del campo (correo o contraseña)
-  if (field === "email" && !/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(value)) {
-    return "El correo no es válido.";
-  }
-  if (field === "pass" && value.length < 6) {
-    return "La contraseña debe tener al menos 6 caracteres.";
-  }
-  return null; // Si es válido
-};
+// export const checTexForm = (value, field) => {
+//   // Validación del campo (correo o contraseña)
+//   if (field === "email" && !/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(value)) {
+//     return "El correo no es válido.";
+//   }
+//   if (field === "pass" && value.length < 6) {
+//     return "La contraseña debe tener al menos 6 caracteres.";
+//   }
+//   return null; // Si es válido
+// };
