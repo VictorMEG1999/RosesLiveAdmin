@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { FormControl, HStack, NativeBaseProvider, Modal, Box } from 'native-base';
-import { Center, VStack, Input, Button, Text, Heading } from 'native-base';
-
+import { FormControl, HStack, NativeBaseProvider,  Box } from 'native-base';
+import { Center, VStack, Input, Button, Text, Heading, ScrollView, KeyboardAvoidingView } from 'native-base';
+/*inportacion para barra superior */
+import Svg, { Path } from 'react-native-svg';
+import styles from '../styles/LoginScreenStyles';
+const { width, height } = Dimensions.get('window');
+import { Dimensions } from 'react-native';
+/*inportacion para barra superior */
 export  function VerificarCod({navigation}) {
   const [code, setCode] = useState(["", "", "", "", "", ""]);
-  const [showModal, setShowModal] = useState(false);
-  const [modalMessage, setModalMessage] = useState('');
-
+  const [validationMessage, setValidationMessage] = useState(''); // Mensaje de validación
   const validCode = "123456"; // Código fijo de ejemplo para la validación
 
   // Función para manejar el cambio en los inputs
@@ -16,20 +19,17 @@ export  function VerificarCod({navigation}) {
     setCode(newCode);
   };
 
-  // Función para validar el código
-  const handleValidateCode = () => {
-    const enteredCode = code.join(""); // Convertir el array de inputs a un string
+ // Función para validar el código
+ const handleValidateCode = () => {
+  const enteredCode = code.join(""); // Convertir el array de inputs a un string
 
-    if (enteredCode === validCode) {
-      setModalMessage("Código válido, cuenta verificada con éxito.");
-      navigation.navigate('CambContra')
-    } else {
-      setModalMessage("Código incorrecto, por favor inténtalo de nuevo.");
-    }
-
-    setShowModal(true); // Mostrar modal
-  };
-
+  if (enteredCode === validCode) {
+    setValidationMessage("Cuenta verificada con exito.");
+    navigation.navigate('CambContrasena');
+  } else {
+    setValidationMessage("Código incorrecto, por favor inténtalo de nuevo.");
+  }
+};
   return (
     <NativeBaseProvider>
       <Center w={"100%"} flex={1} bg="white">
@@ -65,6 +65,16 @@ export  function VerificarCod({navigation}) {
         <Box width={"90%"} marginTop={3} justifyContent={"left"}>
           <Text underline color="coolGray.600" onPress={() => {}} paddingLeft={4} >Volver a enviar el codigo</Text>
         </Box>
+        <Box m={3}>
+          {/* Mostrar el mensaje de validación */}
+          {validationMessage ? (
+                <Box width={"90%"} mt={4}>
+                  <Text color={validationMessage.includes("incorrecto") ? "red.600" : "green.600"} textAlign="center">
+                    {validationMessage}
+                  </Text>
+                </Box>
+              ) : null}
+        </Box>
         {/* Botón para validar */}
         <VStack w={"90%"} m={2}  marginBottom={3} mt="20">
           <Button mt="2" borderRadius={60} bg="#E01983" colorScheme="pink" onPress={handleValidateCode}>
@@ -72,17 +82,6 @@ export  function VerificarCod({navigation}) {
           </Button>
         </VStack>
 
-        {/* Modal para mostrar el resultado de la validación */}
-        <Modal isOpen={showModal} onClose={() => setShowModal(false)} size="lg">
-          <Modal.Content maxWidth="400px">
-            <Modal.Body>
-              <Text textAlign={"center"}>{modalMessage}</Text>
-            </Modal.Body>
-              <Button backgroundColor={"#E01983"} m={2} borderRadius={25} onPress={() => setShowModal(false)}>
-                Cerrar
-              </Button>
-          </Modal.Content>
-        </Modal>
       </Center>
     </NativeBaseProvider>
   );

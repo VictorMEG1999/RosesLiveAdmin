@@ -18,7 +18,7 @@ export function LoginScreen({ navigation }) {
   const [modalMessage, setModalMessage] = useState('');
 
   // Captura de datos
-  const handleChangeText = (name, value) => {
+  const handleChangeText = (name: string, value: string,) => {
     setState({ ...state, [name]: value });
   };
 
@@ -27,7 +27,7 @@ export function LoginScreen({ navigation }) {
     // Comprobación de campo email
     const checEmail = checTex(state.email, "email");
     if (checEmail) {
-      setModalMessage("ERROR campo correo ==> " + checEmail);
+      setModalMessage("Error campo correo ==> " + checEmail);
       setShowModal(true); // Mostrar modal con el error
       return;
     }
@@ -35,7 +35,7 @@ export function LoginScreen({ navigation }) {
     // Comprobación de campo contraseña
     const checPass = checTex(state.pass, "pass"); // Cambiar "email" por "pass"
     if (checPass) {
-      setModalMessage("ERROR campo contraseña ==> " + checPass);
+      setModalMessage("Error campo contraseña ==> " + checPass);
       setShowModal(true); // Mostrar modal con el error
       return;
     }
