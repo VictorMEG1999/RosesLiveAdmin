@@ -1,42 +1,79 @@
-import 'react-native-gesture-handler';
-import { NavigationContainer } from '@react-navigation/native';
-import { Center, Button, HStack, CheckIcon, Text, Divider, NativeBaseProvider, Box } from 'native-base';
-import * as React from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import React from 'react';
+import { View, Text, TextInput, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import styles from '../styles/InicioUsuarioTabStyles';
+import Fontisto from 'react-native-vector-icons/Fontisto';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-export function PerfilUsuarioTab() {
+const Tab = createBottomTabNavigator();
+
+const Buscador = () => {
   return (
-    <NativeBaseProvider>
-      <Center>
-        <Box
-          size={120}
-          bgColor="gray.200"
-          borderRadius="full"
-          mb={5}
-        />
-      </Center>
-
-      <Divider w="100%" bg="pink.500" />
-
-      <Box alignItems="flex-start" mb={10} px={6}>
-        {["Mensajes", "Notificaciones", "Monedero", "Mi Nivel", "Mis Invitaciones", "Galeria"].map((item, index) => (
-          <HStack key={index} mt={2}>
-            <CheckIcon size="5" mt="2.5" color="emerald.500" />
-            <Button variant="unstyled" onPress={() => {}}>
-              {item}
-            </Button>
-          </HStack>
-        ))}
-      </Box>
-
-      <Box alignItems="flex-start" mb={4}>
-        <Button borderRadius={60} bgColor="#E01983" width="80%" alignSelf="center" onPress={() => {}}>
-          Verificar
-        </Button>
-      </Box>
-    </NativeBaseProvider>
+    <View style={styles.containerBuscador}>
+      <View style={styles.inputContainer}>
+        <Fontisto name="world" size={24} style={styles.icon} />
+        <TextInput style={styles.buscador} placeholder="Buscar..." placeholderTextColor="#888" />
+      </View>
+      <View style={styles.viewFiltro}>
+        <FontAwesome name="filter" size={30} style={styles.icon} />
+      </View>
+      <View style={styles.menu}>
+        <Text style={styles.menuText}>Menu aquí</Text>
+      </View>
+    </View>
   );
-}
-export default PerfilUsuarioTab;
+};
+
+const CuadroCargando = () => {
+  return <View style={styles.cuadroCargando} />;
+};
+
+const CuadrosCargando = () => {
+  const cuadros = Array.from({ length: 30 });
+
+  return (
+    <View style={styles.containerCuadro}>
+      {cuadros.map((_, index) => (
+        <CuadroCargando key={index} />
+      ))}
+    </View>
+  );
+};
+
+const Opcion1 = () => {
+  return (
+    <SafeAreaView style={styles.containerScroll}>
+      <ScrollView style={styles.scrollView}>
+        <CuadrosCargando />
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
+
+const Opcion2 = () => {
+  return (
+    <View style={styles.tabContent}>
+      <Text>Opción 2</Text>
+    </View>
+  );
+};
+
+const FiestaUsuarioTab = () => {
+  return (
+    <View style={styles.container}>
+      <Buscador />
+      <Tab.Navigator>
+
+        <Tab.Screen name="Descubrir" component={Opcion2} />
+        <Tab.Screen name="Cerca" component={Opcion1} />
+
+
+
+      </Tab.Navigator>
+    </View>
+  );
+};
+
+export default FiestaUsuarioTab;
 
 

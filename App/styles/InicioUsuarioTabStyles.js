@@ -54,6 +54,11 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         padding: 10,
       },
+      tabBarTop: {
+        backgroundColor: '#fff',
+        borderWidth: 1,
+        borderColor: '#E01983',
+      },
       cuadroCargando: {
         width: '48%', // Ajusta este porcentaje para cambiar el tamaño
         height: 100, // Altura del cuadro
@@ -67,6 +72,22 @@ const styles = StyleSheet.create({
       scrollView: {
         flexGrow: 1,
       },
+      tabBar: {
+          backgroundColor: '#fff', // Fondo del TabBar
+          elevation: 5,            // Sombra en Android
+          shadowColor: '#000',      // Sombra en iOS
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.1,
+          shadowRadius: 4,
+        },
+        tabBarLabel: {
+          fontSize: 14,
+          fontWeight: 'bold',
+        },
+        tabIndicator: {
+          backgroundColor: '#E01983',  // Color del indicador activo
+          height: 3,                // Grosor de la línea
+        },
 });
 
 export default styles;

@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text, TextInput, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import styles from '../styles/InicioUsuarioTabStyles'; // Asegúrate de que este archivo contenga los estilos necesarios
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import LiveScreen from './LiveScreen';
 
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialTopTabNavigator();
 
 const Buscador = () => {
   return (
@@ -40,7 +41,17 @@ const CuadrosCargando = () => {
   );
 };
 
-const Opcion1 = () => {
+const Cerca = () => {
+  return (
+    <SafeAreaView style={styles.containerScroll}>
+          <ScrollView style={styles.scrollView}>
+            <CuadrosCargando />
+          </ScrollView>
+        </SafeAreaView>
+  );
+};
+
+const Live = () => {
   return (
     <SafeAreaView style={styles.containerScroll}>
       <ScrollView style={styles.scrollView}>
@@ -50,11 +61,13 @@ const Opcion1 = () => {
   );
 };
 
-const Opcion2 = () => {
+const Seguidos = () => {
   return (
-    <View style={styles.tabContent}>
-      <Text>Opción 2</Text>
-    </View>
+    <SafeAreaView style={styles.containerScroll}>
+      <ScrollView style={styles.scrollView}>
+        <CuadrosCargando />
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -62,12 +75,17 @@ const InicioUsuarioTab = () => {
   return (
     <View style={styles.container}>
       <Buscador />
-      <Tab.Navigator>
-
-        <Tab.Screen name="Cerca" component={Opcion1} />
-        <Tab.Screen name="Descubrir" component={Opcion2} />
-
-
+      <Tab.Navigator
+         screenOptions={{
+         tabBarStyle: styles.tabBar,
+         tabBarLabelStyle: styles.tabBarLabel,
+         tabBarIndicatorStyle: styles.tabIndicator,
+         tabBarActiveTintColor: '#E01983',
+         tabBarInactiveTintColor: 'gray',
+        }}>
+        <Tab.Screen name="Cerca" component={Cerca} />
+        <Tab.Screen name="Live" component={Live} />
+        <Tab.Screen name="Seguidos" component={Seguidos} />
       </Tab.Navigator>
     </View>
   );

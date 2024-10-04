@@ -4,12 +4,11 @@ const styles = StyleSheet.create({
   tabBarStyle: {
     backgroundColor: '#fff',
     height: 63,
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: '#E01983',
     borderRadius: 25,
     marginHorizontal: 5,
     marginBottom: 4,
-    position: 'absolute',
     left: 0,
     right: 0,
     bottom: 0,
@@ -26,7 +25,6 @@ const styles = StyleSheet.create({
   },
   tabBarLabelStyle: {
     fontSize: 14,
-    fontWeight: 'bold',
   },
   tabBarIconStyle: {
     marginTop: 5,
