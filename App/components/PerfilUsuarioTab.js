@@ -11,13 +11,16 @@ import Octicons from 'react-native-vector-icons/Octicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { View, Dimensions, TouchableOpacity } from 'react-native';
 import { createStackNavigator } from "react-navigation-stack"
-import styles from '../styles/PerfilUsuarioTabStyles'; //Aqui importa tu hoja de estilos
+import styles from '../styles/PerfilUsuarioTabStyles';
+
 
 const { width, height } = Dimensions.get('window');
 
 
 
 export function PerfilUsuarioTab({ navigation }) {
+
+
   const menuItems = [
     { name: "Mensajes", icon: <AntDesign name="message1" style={styles.icons}/>, screen: "MensajesScreen"},
     { name: "Notificaciones", icon: <Ionicons name="notifications-outline" style={styles.icons}/>, screen: "NotificacionesScreen" },
@@ -30,11 +33,11 @@ export function PerfilUsuarioTab({ navigation }) {
   return (
     <NativeBaseProvider>
 
-  <View style={styles.header}>
-      <TouchableOpacity onPress={()=>openDrawer()}>
-      <Ionicons name="menu" size={32} />
-       </TouchableOpacity>
-     </View>
+      <View style={styles.header}>
+                             <TouchableOpacity onPress={() => navigation.navigate('ConfiguracionUsuario')}>
+                             <Ionicons name="menu" size={24} style={styles.menuIco}/>
+                              </TouchableOpacity>
+      </View>
 
       <Center>
         <Box
@@ -74,7 +77,7 @@ export function PerfilUsuarioTab({ navigation }) {
 
 
       <Box alignItems="flex-start" marginTop={1}>
-        <Button style={styles.buttonv} onPress={() => {}}>
+        <Button style={styles.buttonv} onPress={() => navigation.navigate('VerificacionUsuario')}>
           Verificar
         </Button>
       </Box>
