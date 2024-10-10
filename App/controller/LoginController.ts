@@ -1,7 +1,9 @@
+import { useContext } from "react";
 import firebase from "./firebase"
 import { collection , query, where, getDocs, doc,updateDoc } from "firebase/firestore";
-import * as varGlobal from "./variablesglobales"
-  // validacion y texto
+import  UsuarioContex from "../context/usuario/usuarioContex";
+import UsuarioState from "../context/usuario/usuarioState";
+// validacion y texto
   export const checTex =  (text: String, type:String) =>{
     
     const checIcput = [["a","b","c","d","e","f","g","h",
@@ -58,14 +60,23 @@ import * as varGlobal from "./variablesglobales"
 
 export async function login(email: String,pass: String) {
   let e
+  const { infochec } = useContext(UsuarioContex)
+  
   try {
     // construccionde consulta
     const q = query(collection(firebase.db, "usuario"), where("email", "==", email), where("pass", "==", pass));
     const querySnapshot = await getDocs(q)
-    const docs = []
+    console.log(infochec);
+    
+
+
     // recorido de resultados
     querySnapshot.forEach((info) => {
 
+       
+      
+   
+      
 // varGlobal.idUser = info.data().info.id
 // varGlobal.nombre = info.data().nombre
 // varGlobal.numerosStream = info.data().numerosStream
@@ -94,16 +105,12 @@ export async function login(email: String,pass: String) {
 // varGlobal.ultimaFechaModificacion = info.data().ultimaFechaModificacion
 // varGlobal.verificado = info.data().verificado
       
-      e= info.id ;
+      e= info.id ;      
     });
     if(e) {
       // actualisa fecha de ultima conexion 
       // referencia usuario ERORR por el tipo de dato id del usario "e"
-      const idUserRef = doc(firebase.db, "usuario", e );
-      // update campo 
-      const rest = await updateDoc(idUserRef, {
-        ultimaFechaEntrada: Date().toLocaleString()
-      });
+      // update campo ultimaFechaEntrada
     }
   } catch (e) {
     console.log(e);

@@ -1,9 +1,14 @@
 import {napUser} from"./App/navigation/index"
-import{ UserContext } from "./App/context/userContext"
+import UsuarioState from "./App/context/usuario/usuarioState"
 //import CountainerRoutes from './App/navigation';
 
 export default function App() {
   return (
-    napUser()
+    
+    <UsuarioState>
+      {
+        napUser()
+      }
+    </UsuarioState>
   );
 }
