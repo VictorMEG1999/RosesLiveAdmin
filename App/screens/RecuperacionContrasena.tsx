@@ -1,23 +1,22 @@
 import React, { useState } from 'react';
-import { FormControl, NativeBaseProvider, Center, VStack, Input, Button, Text, Modal } from 'native-base';
+import { FormControl, NativeBaseProvider, Center, VStack, Input, Button, Text, Box } from 'native-base';
 
-export  function RecupContra({navigation}) {
+export  function RecupContra({navigation}:{navigation:any}) {
   const [email, setEmail] = useState('');
-  const [showModal, setShowModal] = useState(false);
-  const [modalMessage, setModalMessage] = useState('');
+  const [validationMessage, setValidationMessage] = useState(''); // Mensaje de validación
+  
 
   // Lista de correos de prueba
   const validEmails = ["1","test@example.com", "usuario@correo.com", "admin@dominio.com"];
 
   const handleSubmit = () => {
     if (validEmails.includes(email)) {
-      setModalMessage("El correo existe. Se ha enviado un enlace de recuperación.");
+      setValidationMessage("El correo existe. Se ha enviado un enlace de recuperación.");
       // naveegacion  
       navigation.navigate('VerificarCod')
     } else {
-      setModalMessage("El correo no existe en nuestra base de datos.");
+      setValidationMessage("El correo no existe en nuestra base de datos.");
     }
-    setShowModal(true); /* muestra el modal en lugar de un alert */
   };
 
   return (
@@ -39,6 +38,13 @@ export  function RecupContra({navigation}) {
               value={email}
               onChangeText={setEmail}
             />
+            {validationMessage ? (
+                <Box width={"90%"} mt={4}>
+                  <Text color={validationMessage.includes("incorrecto") ? "green.600" : "red.600"} textAlign="center">
+                    {validationMessage}
+                  </Text>
+                </Box>
+              ) : null}
             <Button
               backgroundColor={"#E01983"}
               borderRadius={25}
@@ -51,18 +57,6 @@ export  function RecupContra({navigation}) {
           </FormControl>
         </VStack>
       </Center>
-
-      {/* Modal personalizado */}
-      <Modal isOpen={showModal} onClose={() => setShowModal(false)} size="lg">
-        <Modal.Content maxWidth="400px">
-          <Modal.Body>
-            <Text textAlign={"center"}>{modalMessage}</Text>
-          </Modal.Body>
-            <Button backgroundColor={"#E01983"} m={2} borderRadius={25} onPress={() => setShowModal(false)}>
-              Cerrar
-            </Button>
-        </Modal.Content>
-      </Modal>
     </NativeBaseProvider>
   );
 }

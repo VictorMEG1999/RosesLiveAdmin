@@ -1,61 +1,35 @@
 import React,{ useReducer } from "react";
 import usuarioReducer from "./usuarioReducer"
 import UsuarioContex from "./usuarioContex";
+import GET_USUAEIO from "./usuarioContex";
 
  const UsuarioState =(props) =>{
-    const inisalState = {
-        usuario: {
-            nombre: "",
-            numerosStream: "",
-            email: "",
-            pass: "",
-            agente: false,
-            apellido: "",
-            borrado: false,
-            cuota: 0,
-            estado: false,
-            fechaRregistro: "",
-            followNumero: 0,
-            follower: 0,
-            gestion: 0,
-            idUsuarioModificador: "",
-            idioma: ["español"],
-            ingreso: 0,
-            lada: 0,
-            moderador: 0,
-            monto: 0,
-            nickName: "",
-            permiso: false,
-            personaRegalaMas: "",
-            sAdmin: false,
-            ultimaFechaEntrada: "",
-            ultimaFechaModificacion: "",
-            verificado: false,
-        },
-        activo:false
-    }
-    const infochec = 0
-    const [state, dispatch] = useReducer(usuarioReducer,inisalState)
+    const inisalState  = {
+        usuario:null
+    };
+    const [state, dispatch] = useReducer(usuarioReducer,inisalState);
 
 
-    const getUsuario =()=>{
-        console.log("usuarioContext");
+    const  usuarioGlobal =  async (usuario)=>{
         
+         const unfo =  dispatch({
+            type: "PUSH_USUARIO_GLOBAL",
+            payload: usuario
+        })
+        return unfo
     }
-    const getPerfil =()=>{}
+    const  getUsuario = ()=>{
+        return (state)
+   }
 
     return(
         <UsuarioContex.Provider value={{
             usuario:state.usuario,
-            infochec,
+            usuarioGlobal,
             getUsuario,
-            getPerfil,
         }}>
             {props.children}
         </UsuarioContex.Provider>
     )
-
-
-
 }
 export default UsuarioState

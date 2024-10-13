@@ -1,113 +1,98 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react'; 
 import { NativeBaseProvider, Center, Box, Heading, VStack, 
         FormControl, Input, Button, KeyboardAvoidingView, 
-        Text, ScrollView,Modal } from 'native-base';
+        Text, ScrollView } from 'native-base';
+// Controlador 
+import { checTex, search, SalveUserData } from "../controller/RegistroUsuarioController"
 
-import {checTex,search,SalveUserData} from "../controller/RegistroUsuarioController"
+export function RegisUsua() {
 
-export  function RegisUsua() {
-
-   // Declaration de validates  
-   const [state, setState] = useState({
-    nombre:"",
-    telefono:"",
-    email:"",
-    pass:"",
-    RepitPass:"",
+  // Estado de los inputs
+  const [state, setState] = useState({
+    nombre: "",
+    telefono: "",
+    email: "",
+    pass: "",
+    RepitPass: "",
   });
 
-  const [showModal, setShowModal] = useState(false);
-  const [modalMessage, setModalMessage] = useState('')
+  // Estado para mensajes de error
+  const [errors, setErrors] = useState({
+    nombre: "",
+    telefono: "",
+    email: "",
+    pass: "",
+    RepitPass: "",
+  });
 
-  // captura de texto de los inputs 
-  const handleChangeText = ( name: string, value: string, ) =>{
-    setState({...state,[name]:value})
-  }
+  // Captura de texto de los inputs
+  const handleChangeText = (name: string, value: string) => {
+    setState({ ...state, [name]: value });
+  };
+
   // Validación de inputs
-  const userSave = async ()  =>{
-    
-    const nombre=state.nombre
-    const telefono=state.telefono
-    const email=state.email
-    const pass=state.pass
-    const RepitPass=state.RepitPass
-    let statusSalve = true
-    
-    // Validación de nombre  
-    const checName = checTex(nombre,"text")
-    if(checName){
-      statusSalve = false
-      setModalMessage("ERROR campo nombre ==> "+ checName )
-      // console.log("ERROR campo nombre ==>",checName);
+  const userSave = async () => {
+    const { nombre, telefono, email, pass, RepitPass } = state;
+    let statusSalve = true;
+    const newErrors = { nombre: "", telefono: "", email: "", pass: "", RepitPass: "" };
+
+    // Validación de nombre
+    const checName = checTex(nombre, "text");
+    if (checName) {
+      statusSalve = false;
+      newErrors.nombre = `Campo incompleto: ${checName}`;
     }
 
     // Validación de teléfono
-    const checTelefono = checTex(telefono,"num")
-    if(checTelefono){
-      statusSalve = false
-      setModalMessage("ERROR campo telefono ==> "+ checTelefono)
-      // console.log("ERROR campo telefono ==>",checTelefono);
+    const checTelefono = checTex(telefono, "num");
+    if (checTelefono) {
+      statusSalve = false;
+      newErrors.telefono = `Escribe solo numeros: ${checTelefono}`;
     }
-    // Validación de existencia teléfono en la base de datos
-    const searchNumero = await search("numerosStream",telefono)
-    if(searchNumero){
-      statusSalve = false
-      setModalMessage("El telefono ya esta asosiado a una cuenta");
-      // console.log("El telefono ya esta asosiado a una cuenta");
+    const searchNumero = await search("numerosStream", telefono);
+    if (searchNumero) {
+      statusSalve = false;
+      newErrors.telefono = "El teléfono ya está asociado a una cuenta.";
     }
 
     // Validación de email
-    const checEmail = checTex(email,"email")
-    if(checEmail){
-      statusSalve = false
-      setModalMessage("ERROR campo email ==> " + checEmail);
-      // console.log("ERROR campo email ==> " + checEmail);
+    const checEmail = checTex(email, "email");
+    if (checEmail) {
+      statusSalve = false;
+      newErrors.email = `El correo ya esta asociado a una cuenta existente: ${checEmail}`;
     }
-    // Validación de existencia email en la base de datos
-    const searchEmail = await search("email" ,email)
+    const searchEmail = await search("email", email);
     if (searchEmail) {
-      statusSalve = false
-      setModalMessage("El coreo ya esta asosiado a una cuenta");
-      // console.log("El coreo ya esta asosiado a una cuenta");
+      statusSalve = false;
+      newErrors.email = "El correo ya está asociado a una cuenta exitente.";
     }
 
-    // validacion de Contraseña
-    const checTexPass = checTex(pass,"email")
-    if(checTexPass){
-      statusSalve = false
-      setModalMessage("ERROR campo Contraseña ==> " +checTexPass);
-      // console.log("ERROR campo Contraseña ==>",checTexPass);
+    // Validación de contraseña
+    const checTexPass = checTex(pass, "email");
+    if (checTexPass) {
+      statusSalve = false;
+      newErrors.pass = `Error en la contraseña: ${checTexPass}`;
     }
-    // Comparación de contraseña  
-    const checTexRepitPass = checTex(RepitPass,"email")
-    if(checTexRepitPass){
-      statusSalve = false
-      setModalMessage("ERROR campo Confirmar Contraseña ==> "+checTexRepitPass);
-      // console.log("ERROR campo Confirmar Contraseña ==>",checTexRepitPass);
-    }else if(pass!=RepitPass){
-      statusSalve = false
-      setModalMessage("lo Contraseña no coincide");
-      // console.log("lo Contraseña no coincide");
+    if (pass !== RepitPass) {
+      statusSalve = false;
+      newErrors.RepitPass = "Las contraseñas no coinciden.";
     }
-    setShowModal(true); // Mostrar modal con el resultado
 
-    // Verificacion de estado y consulta 
+    // Actualizar los errores en el estado
+    setErrors(newErrors);
 
-    if(statusSalve){
-      let doc = await SalveUserData(nombre, telefono, email, pass)
-      setModalMessage( "inser = "+doc.id);
-      setShowModal(true); // Mostrar modal con el resultado
-
-      // console.log("inser",doc.id);
+    // Si todo está correcto, guardar el usuario
+    if (statusSalve) {
+      const doc = await SalveUserData(nombre, telefono, email, pass);
+      console.log("Inserción exitosa: ", doc.id);
     }
-  }
+  };
 
   return (
     <NativeBaseProvider>
       <KeyboardAvoidingView>
         <ScrollView>
           <Center w="100%" flex={1} bg="white">
-            {/* Formulario */}
             <Center mt={3}>
               <Box 
                 size={100} 
@@ -118,26 +103,72 @@ export  function RegisUsua() {
             </Center>
             <Center width={"90%"}>
               <Heading size="lg" fontWeight="300" color="coolGray.800" textAlign="center">
-                Regístrate ingresando los siguientes datos y diviértete conociendo personas
+                Regístrate y diviértete conociendo personas
               </Heading>
             </Center>
             <VStack width="90%" space={2} mt="5">
               {/* Formulario */}
               <FormControl>
                 <Text mt={2}>Nombre</Text>
-                <Input onChangeText={(value)=> handleChangeText('nombre',value)} type='text' borderRadius={10} borderColor={"#E01983"} mt="2" ></Input>
-                <Text mt={2}>Telefono</Text>
-                <Input onChangeText={(value)=> handleChangeText('telefono',value)} type='text' borderRadius={10} borderColor={"#E01983"} mt="2" ></Input>
+                <Input 
+                  onChangeText={(value) => handleChangeText('nombre', value)} 
+                  type='text' 
+                  borderRadius={10} 
+                  borderColor={"#E01983"} 
+                  mt="2" 
+                />
+                {errors.nombre ? <Text color="red.500">{errors.nombre}</Text> : null}
+
+                <Text mt={2}>Teléfono</Text>
+                <Input 
+                  onChangeText={(value) => handleChangeText('telefono', value)} 
+                  type='text' 
+                  borderRadius={10} 
+                  borderColor={"#E01983"} 
+                  mt="2" 
+                />
+                {errors.telefono ? <Text color="red.500">{errors.telefono}</Text> : null}
+
                 <Text mt={2}>Correo</Text>
-                <Input onChangeText={(value)=> handleChangeText('email',value)} type='text' borderRadius={10} borderColor={"#E01983"} mt="2" ></Input>
+                <Input 
+                  onChangeText={(value) => handleChangeText('email', value)} 
+                  type='text' 
+                  borderRadius={10} 
+                  borderColor={"#E01983"} 
+                  mt="2" 
+                />
+                {errors.email ? <Text color="red.500">{errors.email}</Text> : null}
+
                 <Text mt={2}>Contraseña</Text>
-                <Input onChangeText={(value)=> handleChangeText('pass',value)} borderRadius={10} borderColor={"#E01983"} type="password" mt="2" ></Input>
+                <Input 
+                  onChangeText={(value) => handleChangeText('pass', value)} 
+                  borderRadius={10} 
+                  borderColor={"#E01983"} 
+                  type="password" 
+                  mt="2" 
+                />
+                {errors.pass ? <Text color="red.500">{errors.pass}</Text> : null}
+
                 <Text mt={2}>Confirmar Contraseña</Text>
-                <Input onChangeText={(value)=> handleChangeText('RepitPass',value)} borderRadius={10} borderColor={"#E01983"} type="password" mt="2" ></Input>
-             </FormControl>
+                <Input 
+                  onChangeText={(value) => handleChangeText('RepitPass', value)} 
+                  borderRadius={10} 
+                  borderColor={"#E01983"} 
+                  type="password" 
+                  mt="2" 
+                />
+                {errors.RepitPass ? <Text color="red.500">{errors.RepitPass}</Text> : null}
+              </FormControl>
+
               {/* Botón */}
               <VStack space={2} marginBottom={3} mt="5">
-                <Button mt="2" borderRadius={60} bg="#E01983" colorScheme="pink" onPress={() => {userSave()}}>
+                <Button 
+                  mt="2" 
+                  borderRadius={60} 
+                  bg="#E01983" 
+                  colorScheme="pink" 
+                  onPress={userSave}
+                >
                   Crear cuenta
                 </Button>
               </VStack>
@@ -145,17 +176,6 @@ export  function RegisUsua() {
           </Center>
         </ScrollView>
       </KeyboardAvoidingView>
-       {/* Modal personalizado */}
-       <Modal isOpen={showModal} onClose={() => setShowModal(false)} size="lg">
-        <Modal.Content maxWidth="400px">
-          <Modal.Body>
-            <Text textAlign={"center"}>{modalMessage}</Text>
-          </Modal.Body>
-            <Button backgroundColor={"#E01983"} m={"2"} borderRadius={25} onPress={() => setShowModal(false)}>
-              Cerrar
-            </Button>
-        </Modal.Content>
-      </Modal>
     </NativeBaseProvider>
   );
 }

@@ -1,22 +1,20 @@
 import React, { useState } from 'react';
 import { FormControl, NativeBaseProvider,
        Center, Heading, VStack, Input, 
-       Button, Text, Modal } from 'native-base';
+       Button, Text, Box } from 'native-base';
 
 export function CambContra({navigation}) {
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [showModal, setShowModal] = useState(false);
-  const [modalMessage, setModalMessage] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState(''); 
+  const [validationMessage, setValidationMessage] = useState(''); // Mensaje de validación
 
   const handleSubmit = () => {
     if (password === confirmPassword) {
-      setModalMessage("Las contraseñas coinciden.");
+      setValidationMessage("Las contraseñas coinciden.");
       navigation.navigate('LoginScreen')
     } else {
-      setModalMessage("Las contraseñas no coiciden, intentalo nuevamente.");
+      setValidationMessage("Las contraseñas no coiciden, intentalo nuevamente.");
     }
-    setShowModal(true);/* muestra el modal en lugar de un alert  */
   };
 
   return (
@@ -39,6 +37,13 @@ export function CambContra({navigation}) {
                 value={confirmPassword}
                 onChangeText={setConfirmPassword}
               />
+              {validationMessage ? (
+                <Box width={"90%"} mt={4}>
+                  <Text color={validationMessage.includes("incorrecto") ? "green.600" : "red.600"} textAlign="center">
+                    {validationMessage}
+                  </Text>
+                </Box>
+              ) : null}
               <Button
                 backgroundColor={"#E01983"}
                 borderRadius={25}
@@ -52,18 +57,6 @@ export function CambContra({navigation}) {
           </VStack>
         </Center>
       </Center>
-
-      {/* Modal personalizado */}
-      <Modal isOpen={showModal} onClose={() => setShowModal(false)} size="lg">
-        <Modal.Content maxWidth="400px">
-          <Modal.Body>
-            <Text>{modalMessage}</Text>
-          </Modal.Body>
-            <Button backgroundColor={"#E01983"} borderRadius={"25"} flex={1} onPress={() => setShowModal(false)}>
-              Cerrar
-            </Button>
-        </Modal.Content>
-      </Modal>
     </NativeBaseProvider>
   );
 }

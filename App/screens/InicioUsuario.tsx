@@ -24,22 +24,22 @@ export const InicioUsuario = () => {
                let iconName;
                 switch (route.name) {
                              case 'Inicio':
-                               iconName = 'home-outline';
+                               iconName = 'home';
                                break;
                              case 'Fiesta':
-                               iconName = 'beer-outline';
+                               iconName = 'game-controller';
                                break;
                              case 'Live':
-                               iconName = 'videocam-outline';
+                               iconName = 'videocam-sharp';
                                break;
                              case 'Top':
-                               iconName = 'trophy-outline';
+                               iconName = 'trophy';
                                break;
                              case 'Perfil':
-                               iconName = 'person-outline';
+                               iconName = 'person';
                                break;
                              default:
-                               iconName = 'home-outline';
+                               iconName = 'home';
                            }
                return <Ionicons name={iconName} size={size} color={color} />;
              },

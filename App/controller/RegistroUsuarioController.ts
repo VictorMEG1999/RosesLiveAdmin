@@ -83,8 +83,9 @@ export async function search (campo: string,valorvalue: string) {
         numerosStream :numerosStream,
         email :email,
         pass : pass,
+        fotoUsuario:"https://www.pngegg.com/es/search?q=usuario",
         agente : false,
-        apellido:"Live", // falta en el formulario
+        apellido:"", // falta en el formulario
         borrado:false,
         cuota:0,
         estado:true,
@@ -99,12 +100,12 @@ export async function search (campo: string,valorvalue: string) {
         moderador:0,
         monto:0,
         nickName:nombre,
-        permiso:true,
+        permiso:false,
         personaRegalaMas:"",
         sAdmin:false,
         ultimaFechaEntrada:Date().toLocaleString(),// fecha del sistema 
         ultimaFechaModificacion:Date().toLocaleString(),// fecha del sistema 
-        verificado:true,
+        verificado:false,
         // revisa el nombre de los campos pofa porque alguinos tiene giones (se lo quiite ne la pureba)
       });
       return docRef 

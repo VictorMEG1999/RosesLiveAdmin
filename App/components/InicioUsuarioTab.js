@@ -1,73 +1,33 @@
-import React from 'react';
-import { View, Text, TextInput, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import styles from '../styles/InicioUsuarioTabStyles'; // Asegúrate de que este archivo contenga los estilos necesarios
-import Fontisto from 'react-native-vector-icons/Fontisto';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import React from  'react';
+import { View, Text, TextInput, StyleSheet, ScrollView, SafeAreaView,
+TouchableOpacity, Alert } from 'react-native';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import styles from '../styles/InicioUsuarioTabStyles';
+import { useNavigation } from '@react-navigation/native';
 
-const Tab = createBottomTabNavigator();
+import HeaderUsuario from './HeaderUsuario';
+import TabCerca from './TabCerca';
+import TabLive from './TabLive';
+import TabSeguidos from './TabSeguidos';
 
-const Buscador = () => {
-  return (
-    <View style={styles.containerBuscador}>
-      <View style={styles.inputContainer}>
-        <Fontisto name="world" size={24} style={styles.icon} />
-        <TextInput style={styles.buscador} placeholder="Buscar..." placeholderTextColor="#888" />
-      </View>
-      <View style={styles.viewFiltro}>
-        <FontAwesome name="filter" size={30} style={styles.icon} />
-      </View>
-      <View style={styles.menu}>
-        <Text style={styles.menuText}>Menu aquí</Text>
-      </View>
-    </View>
-  );
-};
 
-const CuadroCargando = () => {
-  return <View style={styles.cuadroCargando} />;
-};
-
-const CuadrosCargando = () => {
-  const cuadros = Array.from({ length: 30 });
-
-  return (
-    <View style={styles.containerCuadro}>
-      {cuadros.map((_, index) => (
-        <CuadroCargando key={index} />
-      ))}
-    </View>
-  );
-};
-
-const Opcion1 = () => {
-  return (
-    <SafeAreaView style={styles.containerScroll}>
-      <ScrollView style={styles.scrollView}>
-        <CuadrosCargando />
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
-
-const Opcion2 = () => {
-  return (
-    <View style={styles.tabContent}>
-      <Text>Opción 2</Text>
-    </View>
-  );
-};
+const Tab = createMaterialTopTabNavigator();
 
 const InicioUsuarioTab = () => {
   return (
     <View style={styles.container}>
-      <Buscador />
-      <Tab.Navigator>
-
-        <Tab.Screen name="Cerca" component={Opcion1} />
-        <Tab.Screen name="Descubrir" component={Opcion2} />
-
-
+     <HeaderUsuario />
+      <Tab.Navigator
+         screenOptions={{
+         tabBarStyle: styles.tabBar,
+         tabBarLabelStyle: styles.tabBarLabel,
+         tabBarIndicatorStyle: styles.tabIndicator,
+         tabBarActiveTintColor: '#E01983',
+         tabBarInactiveTintColor: 'gray',
+        }}>
+        <Tab.Screen name="Cerca" component={TabCerca} />
+        <Tab.Screen name="Live" component={TabLive} />
+        <Tab.Screen name="Seguidos" component={TabSeguidos} />
       </Tab.Navigator>
     </View>
   );
