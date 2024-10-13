@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { NativeBaseProvider, Center, Box, Heading, VStack, 
         FormControl, Input, Button, KeyboardAvoidingView, 
         Text, ScrollView } from 'native-base';
-
-import { checTex, search, SalveUserData } from "../controller/registro-usuario"
+// Controlador 
+import { checTex, search, SalveUserData } from "../controller/RegistroUsuarioController"
 
 export function RegisUsua() {
 

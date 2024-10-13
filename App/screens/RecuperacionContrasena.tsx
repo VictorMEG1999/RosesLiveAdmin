@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FormControl, NativeBaseProvider, Center, VStack, Input, Button, Text, Box } from 'native-base';
 
-export  function RecupContra({navigation}) {
+export  function RecupContra({navigation}:{navigation:any}) {
   const [email, setEmail] = useState('');
   const [validationMessage, setValidationMessage] = useState(''); // Mensaje de validación
   

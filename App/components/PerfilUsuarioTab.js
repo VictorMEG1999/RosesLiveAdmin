@@ -12,15 +12,32 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { View, Dimensions, TouchableOpacity } from 'react-native';
 import { createStackNavigator } from "react-navigation-stack"
 import styles from '../styles/PerfilUsuarioTabStyles';
+import  UsuarioContex from "../context/usuario/usuarioContex";
+import { useContext } from "react";
 
 
 const { width, height } = Dimensions.get('window');
 
 
 
-export function PerfilUsuarioTab({ navigation }) {
+export function PerfilUsuarioTab({navigation}) {
+
+  // infromacion de usuarios
+  const { getUsuario } = useContext(UsuarioContex)
+
+  const usuario = getUsuario()
+  const fotoUsuario = usuario.state.usuario.fotoUsuario;
+  const nombreUsuario = usuario.state.usuario.nombre;
+  const pais  =  "mexico" // hacer consulta 
+  const idioma  =  "Español" // hacer consulta 
+  const nummeroAmigo  =  0 // hacer consulta 
+  const nummeroSeguidores  =  0 // hacer consulta 
+  const nummeroSeguidos  =  0 // hacer consulta 
 
 
+  
+  // console.log("b" +state );
+  
   const menuItems = [
     { name: "Mensajes", icon: <AntDesign name="message1" style={styles.icons}/>, screen: "MensajesScreen"},
     { name: "Notificaciones", icon: <Ionicons name="notifications-outline" style={styles.icons}/>, screen: "NotificacionesScreen" },
@@ -45,17 +62,18 @@ export function PerfilUsuarioTab({ navigation }) {
           bgColor="gray.200"
           borderRadius="full"         
         />
-
-        <Center><Text bold top={2}>#usuario</Text></Center>
+        {/* fotoUsuario ruta de imagen */}
+        <>{fotoUsuario}</>
+        <Center><Text bold top={2}>{nombreUsuario}</Text></Center>
              <HStack space={"16"} justifyContent="center" marginTop={5}>
-              <Center><Text bold>Pais</Text></Center>
-              <Center><Text bold>Idioma</Text></Center>
+              <Center><Text bold>{pais}</Text></Center>
+              <Center><Text bold>{idioma}</Text></Center>
             </HStack>
 
             <HStack space={"10"} justifyContent="center" marginTop={4}>
-              <Center><Text bold>#amigos</Text></Center>
-              <Center><Text bold>#seguidores</Text></Center>
-              <Center><Text bold>#siguiendo</Text></Center>
+              <Center><Text bold>Amigos: {nummeroAmigo}</Text></Center>
+              <Center><Text bold>Seguidores: { nummeroSeguidores }</Text></Center>
+              <Center><Text bold>Siguiendo: { nummeroSeguidos }</Text></Center>
             </HStack>
 
       </Center>
