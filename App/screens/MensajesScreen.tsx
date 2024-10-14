@@ -1,37 +1,34 @@
 import React from 'react';
 import { FlatList } from 'react-native';
-import { Box, Text, HStack, VStack, Divider, NativeBaseProvider } from 'native-base';
+import { Box, NativeBaseProvider } from 'native-base';
+import PersonaItem from '../components/MensajesScreen';
+import styles from '../styles/MensajesStyles';
+import { useNavigation } from '@react-navigation/native';
+import { MensajesScreenNavigationProp } from '../navigation/types'; // Mantén esta línea, pero elimina la otra
+
+// Lista de personas con mensaje predeterminado
+const personas = [
+  { id: '1', nombre: 'Juan Pérez', mensaje: 'Hola, ¿cómo estás?' },
+  { id: '2', nombre: 'Ana Gómez', mensaje: '¡Buen día!' },
+  { id: '3', nombre: 'Carlos Ruiz', mensaje: 'Nos vemos pronto.' },
+  { id: '4', nombre: 'María Fernanda', mensaje: 'Saludos cordiales.' },
+  { id: '5', nombre: 'Luis Martínez', mensaje: '¿Qué tal?' },
+];
 
 export const MensajesScreen = () => {
+  const navigation = useNavigation<MensajesScreenNavigationProp>(); // Tipar el hook
 
-  // Ejemplo de datos de mensajes
-  const mensajes = [
-    { id: '1', usuario: 'Juan', mensaje: 'Hola, ¿cómo estás?' },
-    { id: '2', usuario: 'María', mensaje: '¿Nos vemos mañana?' },
-    { id: '3', usuario: 'Pedro', mensaje: '¡Buen trabajo!' },
-    { id: '4', usuario: 'Ana', mensaje: 'Me encanta el nuevo proyecto.' },
-    { id: '5', usuario: 'Luis', mensaje: 'Estoy de acuerdo con los cambios.' },
-  ];
-
-  const renderItem = ({ item }) => (
-    <Box px={5} py={2}>
-      <HStack space={3} justifyContent="space-between">
-        <VStack>
-          <Text bold>{item.usuario}</Text>
-          <Text>{item.mensaje}</Text>
-        </VStack>
-      </HStack>
-      <Divider my={2} />
-    </Box>
-  );
+  const handlePress = (usuario: any) => {
+    navigation.navigate('ChatScreen', { usuario }); // Navega a la pantalla de chat
+  };
 
   return (
     <NativeBaseProvider>
-      <Box flex={1} bg="white">
+      <Box style={styles.container}>
         <FlatList
-          data={mensajes}
+          data={personas}
           keyExtractor={(item) => item.id}
-          renderItem={renderItem}
+          renderItem={({ item }) => <PersonaItem item={item} onPress={handlePress} />}
         />
       </Box>
     </NativeBaseProvider>
