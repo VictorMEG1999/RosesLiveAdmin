@@ -21,6 +21,7 @@ import {NivelScreen} from "../screens/NivelScreen"
 import {InvitacionesScreen} from "../screens/InvitacionesScreen"
 import {GaleriaScreen} from "../screens/GaleriaScreen"
 import {VerificacionUsuario} from "../screens/VerificacionUsuario"
+import {ChatScreen} from "../screens/ChatScreen"
 
 
 //import CountainerRoutes from './App/navigation';
@@ -51,6 +52,7 @@ export function napUser() {
             <Stack.Screen name="InvitacionesScreen" component={InvitacionesScreen} />
             <Stack.Screen name="GaleriaScreen" component={GaleriaScreen} />
             <Stack.Screen name="VerificacionUsuario" component={VerificacionUsuario} />
+            <Stack.Screen name='ChatScreen' component={ChatScreen}/>
 
 
       </Stack.Navigator>

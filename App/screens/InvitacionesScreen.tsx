@@ -1,59 +1,44 @@
 import React, { useState } from 'react';
-import { Box, Text, VStack, HStack, Button, Center, NativeBaseProvider, FlatList } from 'native-base';
+import { NativeBaseProvider,Box, Input, HStack, Icon } from 'native-base';
+import Invitaciones from "../components/Invitaciones"; // Componente separado
+
 
 export const InvitacionesScreen = () => {
-  // Datos de ejemplo de solicitudes de seguimiento
-  const [solicitudes, setSolicitudes] = useState([
-    { id: '1', nombre: 'Usuario1' },
-    { id: '2', nombre: 'Usuario2' },
-    { id: '3', nombre: 'Usuario3' },
-  ]);
+  const invitacionesIniciales = [
+    { id: '1', nombre: 'Norman', mensaje: 'Quiere ser tu agente' },
+    { id: '2', nombre: 'Carlos', mensaje: 'Quiere ser tu agente' },
+    { id: '3', nombre: 'Juan', mensaje: 'Quiere ser tu agente' },
+    { id: '4', nombre: 'Carla', mensaje: 'Quiere ser tu agente' },
+    { id: '5', nombre: 'Martha ', mensaje: 'Quiere ser tu agente' },
+    // más invitaciones
+  ];
 
-  // Función para aceptar la solicitud
-  const aceptarSolicitud = (id) => {
-    setSolicitudes(solicitudes.filter(solicitud => solicitud.id !== id));
-    // Aquí puedes agregar lógica para aceptar la solicitud (API, base de datos, etc.)
+  const [invitaciones, setInvitaciones] = useState(invitacionesIniciales);
+
+  const aceptarInvitacion = (id: String) => {
+    setInvitaciones((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, mensaje: 'Invitación aceptada', estado: 'aceptada' } : item))
+    );
   };
 
-  // Función para rechazar la solicitud
-  const rechazarSolicitud = (id) => {
-    setSolicitudes(solicitudes.filter(solicitud => solicitud.id !== id));
-    // Aquí puedes agregar lógica para rechazar la solicitud (API, base de datos, etc.)
+  const eliminarInvitacion = (id: String) => {
+    setInvitaciones((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, mensaje: 'Invitación rechazada', estado: 'rechazada' } : item))
+    );
   };
 
   return (
     <NativeBaseProvider>
-      <Box flex={1} bg="white" px={5} py={8}>
-        <Center>
-          <Text bold fontSize="2xl" mb={5}>Mis Invitaciones</Text>
-        </Center>
-
-        <VStack space={5}>
-          {/* Lista de solicitudes */}
-          <FlatList
-            data={solicitudes}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <Box borderBottomWidth={1} borderColor="gray.200" pb={4} mb={4}>
-                <HStack justifyContent="space-between" alignItems="center">
-                  <Text fontSize="lg">{item.nombre} te ha enviado una solicitud</Text>
-                  <HStack space={2}>
-                    {/* Botón para aceptar la solicitud */}
-                    <Button colorScheme="green" onPress={() => aceptarSolicitud(item.id)}>Aceptar</Button>
-
-                    {/* Botón para rechazar la solicitud */}
-                    <Button colorScheme="red" onPress={() => rechazarSolicitud(item.id)}>Rechazar</Button>
-                  </HStack>
-                </HStack>
-              </Box>
-            )}
-            ListEmptyComponent={() => (
-              <Center>
-                <Text color="gray.500">No tienes nuevas invitaciones</Text>
-              </Center>
-            )}
+      <Box safeArea flex={1} p={4}>
+        <HStack alignItems="center" mb={4}>
+          <Input
+            placeholder="Buscar"
+            width="100%"
+            variant="rounded"
+            //InputLeftElement={<Icon as={<Ionicons name="search" />} size={5} ml={2} color="gray.400" />}
           />
-        </VStack>
+        </HStack>
+        <Invitaciones invitaciones={invitaciones} onAceptar={aceptarInvitacion} onEliminar={eliminarInvitacion} />
       </Box>
     </NativeBaseProvider>
   );
