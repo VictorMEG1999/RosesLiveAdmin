@@ -1,4 +1,4 @@
-package com.roseslive
+package com.rosesliveAdmin
 
 import android.app.Application
 import com.facebook.react.PackageList

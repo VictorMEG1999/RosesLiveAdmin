@@ -5,11 +5,8 @@ import {
 } from 'native-base';
 import Svg, { Path } from 'react-native-svg';
 import styles from '../styles/LoginScreenStyles';
-// Controlador 
 import { checTex, login } from "../controller/LoginController";
-
 import { Dimensions } from 'react-native';
-// Contexto de usario / variables globales  
 import UsuarioContex from '../context/usuario/usuarioContex';
 
 const { width, height } = Dimensions.get('window');
@@ -74,7 +71,7 @@ export function LoginScreen({ navigation }: { navigation: any }) {
           </Center>
 
           <Heading size="lg" fontWeight="600" color="coolGray.800" textAlign="center">
-            Iniciar Sesión
+            Administración
           </Heading>
 
           <VStack space={3} mt="5">
@@ -108,17 +105,13 @@ export function LoginScreen({ navigation }: { navigation: any }) {
                 onPress={() => { log_ins(); }}>
                 Iniciar Sesión
               </Button>
-              <Button style={styles.button} _pressed={styles.buttonPressed}
-                onPress={() => { navigation.navigate('RegisUsua'); }}>
-                Crear Cuenta
-              </Button>
             </VStack>
           </VStack>
         </VStack>
 
         {/* Imagen figura SVG */}
         <Svg height="30%" width={width} viewBox="0 0 1440 350" style={styles.wave}>
-          <Path fill="#E01983" d="M0,-20 C500,-200 1000,20 1440,-200 L1440,800 L0,800 Z" />
+          <Path fill="#1087e3" d="M0,-20 C500,-200 1000,20 1440,-200 L1440,800 L0,800 Z" />
         </Svg>
       </Center>
 
@@ -128,7 +121,7 @@ export function LoginScreen({ navigation }: { navigation: any }) {
           <Modal.Body>
             <Text textAlign={"center"}>{modalMessage}</Text>
           </Modal.Body>
-          <Button backgroundColor={"#E01983"} m={"2"} borderRadius={25} onPress={() => setShowModal(false)}>
+          <Button backgroundColor={"#1087e3"} m={"2"} borderRadius={25} onPress={() => setShowModal(false)}>
             Cerrar
           </Button>
         </Modal.Content>

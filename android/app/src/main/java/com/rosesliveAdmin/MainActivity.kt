@@ -1,4 +1,5 @@
-package com.roseslive
+package com.rosesliveAdmin
+
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

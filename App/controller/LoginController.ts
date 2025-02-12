@@ -62,7 +62,7 @@ export async function login(email: String, pass: String) {
   let infoUser
   try {
     // construccionde consulta
-    const q = query(collection(firebase.db, "usuario"), where("email", "==", email), where("pass", "==", pass));
+    const q = query(collection(firebase.db, "admin"), where("email", "==", email), where("pass", "==", pass));
     const querySnapshot = await getDocs(q)
 
     if (querySnapshot) {

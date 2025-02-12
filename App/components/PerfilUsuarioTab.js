@@ -42,9 +42,9 @@ export function PerfilUsuarioTab({navigation}) {
     { name: "Mensajes", icon: <AntDesign name="message1" style={styles.icons}/>, screen: "MensajesScreen"},
     { name: "Notificaciones", icon: <Ionicons name="notifications-outline" style={styles.icons}/>, screen: "NotificacionesScreen" },
     { name: "Monedero", icon: <SimpleLineIcons name="wallet" style={styles.icons}/>, screen: "MonederoScreen" },
-    { name: "Mi Nivel", icon: <MaterialIcons name="star-border" style={styles.icons}/>, screen: "NivelScreen" },
-    { name: "Mis Invitaciones", icon: <Octicons name="people" style={styles.icons}/>, screen: "InvitacionesScreen" },
-    { name: "Galeria", icon: <FontAwesome name="photo" style={styles.icons}/>, screen: "GaleriaScreen" },
+    { name: "Top", icon: <MaterialIcons name="star-border" style={styles.icons}/>, screen: "NivelScreen" },
+    { name: "Usuarios Activos", icon: <Octicons name="people" style={styles.icons}/>, screen: "InvitacionesScreen" },
+
   ];
 
   return (
@@ -59,7 +59,7 @@ export function PerfilUsuarioTab({navigation}) {
       <Center>
         <Box
           size={120}
-          bgColor="gray.200"
+          bgColor="#1087e3"
           borderRadius="full"         
         />
         {/* fotoUsuario ruta de imagen */}
@@ -78,7 +78,7 @@ export function PerfilUsuarioTab({navigation}) {
 
       </Center>
 
-      <Divider w="100%" bg="pink.500" marginTop={7} />
+      <Divider w="100%" bg="#1087e3" marginTop={7} />
 
 
       <Box alignItems="flex-start"  px={8} marginTop={4}>

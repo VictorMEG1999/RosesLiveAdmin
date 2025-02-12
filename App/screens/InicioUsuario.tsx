@@ -1,10 +1,10 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import InicioUsuarioTab from '../components/InicioUsuarioTab';
-import FiestaUsuarioTab from '../components/FiestaUsuarioTab';
-import LiveUsuarioTab from '../components/LiveUsuarioTab';
-import TopUsuarioTab from '../components/TopUsuarioTab';
+import UsuariosTab from '../components/UsuariosTab';
+import LivesTab from '../components/LivesTab';
+import VentasTab from '../components/VentasTab';
+import ReportesTab from '../components/ReportesTab';
 import PerfilUsuarioTab from '../components/PerfilUsuarioTab';
 import { NativeBaseProvider} from 'native-base';
 import styles from '../styles/InicioUsuarioStyles';
@@ -23,17 +23,17 @@ export const InicioUsuario = () => {
              tabBarIcon: ({ color, size }) => {
                let iconName;
                 switch (route.name) {
-                             case 'Inicio':
-                               iconName = 'home';
+                             case 'Usuarios':
+                               iconName = 'accessibility';
                                break;
-                             case 'Fiesta':
-                               iconName = 'game-controller';
+                             case 'Lives':
+                               iconName = 'albums';
                                break;
-                             case 'Live':
-                               iconName = 'videocam-sharp';
+                             case 'Ventas':
+                               iconName = 'analytics';
                                break;
-                             case 'Top':
-                               iconName = 'trophy';
+                             case 'Reportes':
+                               iconName = 'bar-chart';
                                break;
                              case 'Perfil':
                                iconName = 'person';
@@ -51,10 +51,10 @@ export const InicioUsuario = () => {
              tabBarIconStyle: styles.tabBarIconStyle,
            })}
          >
-           <Tab.Screen name="Inicio" component={InicioUsuarioTab} options={{ headerShown: false }}/>
-           <Tab.Screen name="Fiesta" component={FiestaUsuarioTab} options={{ headerShown: false }}/>
-           <Tab.Screen name="Live" component={LiveUsuarioTab} options={{ headerShown: false }}/>
-           <Tab.Screen name="Top" component={TopUsuarioTab} options={{ headerShown: false }}/>
+           <Tab.Screen name="Usuarios" component={UsuariosTab} options={{ headerShown: false }}/>
+           <Tab.Screen name="Lives" component={LivesTab} options={{ headerShown: false }}/>
+           <Tab.Screen name="Ventas" component={VentasTab} options={{ headerShown: false }}/>
+           <Tab.Screen name="Reportes" component={ReportesTab} options={{ headerShown: false }}/>
            <Tab.Screen name="Perfil" component={PerfilUsuarioTab} options={{ headerShown: false }}/>
          </Tab.Navigator>
 

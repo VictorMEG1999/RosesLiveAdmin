@@ -8,7 +8,7 @@ const TabSeguidos = () => {
   return (
     <SafeAreaView style={styles.containerScroll}>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
-         <Text style={styles.mensajeTexto}>Aún no sigues a nadie</Text>
+         <Text style={styles.mensajeTexto}>Aún no sigues a nadie xd</Text>
       </ScrollView>
     </SafeAreaView>
   );

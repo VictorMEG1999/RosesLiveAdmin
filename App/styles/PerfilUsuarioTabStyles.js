@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 
       icons: {
         fontSize: 24,
-        color: '#E01983',
+        color: '#1087e3',
         top: '18%',
         right: '2%',
       
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         borderRadius: 60,
         width: '90%',
         alignSelf: 'center',
-        backgroundColor: '#E01983'
+        backgroundColor: '#1087e3'
       },
       header:{
         width:"100%",

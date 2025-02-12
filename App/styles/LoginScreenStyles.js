@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   input: {
-    borderColor: '#E01983',
+    borderColor: '#1087e3',
     borderWidth: 1,
     borderRadius: 10,
     paddingHorizontal: 16,
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 60,
     marginTop: 10,
-    backgroundColor: '#E01983',
+    backgroundColor: '#1087e3',
     width: '100%',
   },
   buttonPressed: {

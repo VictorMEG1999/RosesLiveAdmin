@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     height: 63,
     borderWidth: 1,
-    borderColor: '#E01983',
+    borderColor: '#1087e3',
     borderRadius: 25,
     marginHorizontal: 5,
     marginBottom: 4,
@@ -18,10 +18,10 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   tabBarActiveBackgroundColor: {
-      color: '#E01983',
+      color: '#1087e3',
   },
   tabBarInactiveTintColor: {
-    color: '#E01983',
+    color: '#1087e3',
   },
   tabBarLabelStyle: {
     fontSize: 14,

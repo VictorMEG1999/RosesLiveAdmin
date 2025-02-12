@@ -2,18 +2,18 @@ import React from  'react';
 import { View, Text, TextInput, StyleSheet, ScrollView, SafeAreaView,
 TouchableOpacity, Alert } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import styles from '../styles/InicioUsuarioTabStyles';
+import styles from '../styles/UsuariosTabStyles';
 import { useNavigation } from '@react-navigation/native';
 
 import HeaderUsuario from './HeaderUsuario';
-import TabCerca from './TabCerca';
-import TabLive from './TabLive';
-import TabSeguidos from './TabSeguidos';
+import TopUsuariosActivos from './TopUsuariosActivos';
+import TopAgentesActivos from './TopAgentesActivos';
+import TopAdmin from './TopAdmin';
 
 
 const Tab = createMaterialTopTabNavigator();
 
-const InicioUsuarioTab = () => {
+const UsuariosTab = () => {
   return (
     <View style={styles.container}>
      <HeaderUsuario />
@@ -22,15 +22,15 @@ const InicioUsuarioTab = () => {
          tabBarStyle: styles.tabBar,
          tabBarLabelStyle: styles.tabBarLabel,
          tabBarIndicatorStyle: styles.tabIndicator,
-         tabBarActiveTintColor: '#E01983',
+         tabBarActiveTintColor: '#1087e3',
          tabBarInactiveTintColor: 'gray',
         }}>
-        <Tab.Screen name="Cerca" component={TabCerca} />
-        <Tab.Screen name="Live" component={TabLive} />
-        <Tab.Screen name="Seguidos" component={TabSeguidos} />
+        <Tab.Screen name="Usuarios Activos" component={TopUsuariosActivos} />
+        <Tab.Screen name="Agentes Activos" component={TopAgentesActivos} />
+        <Tab.Screen name="Admin" component={TopAdmin} />
       </Tab.Navigator>
     </View>
   );
 };
 
-export default InicioUsuarioTab;
+export default UsuariosTab;
