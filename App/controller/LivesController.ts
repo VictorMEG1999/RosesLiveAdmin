@@ -1,5 +1,5 @@
 import firebase from "./firebase";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, doc, setDoc } from "firebase/firestore";
 
 export async function getLives(activos = true) {
   let lives = [];
@@ -32,4 +32,35 @@ export async function getLives(activos = true) {
   }
 
   return lives;
+}
+
+/**
+ *
+ * @param selectedUser
+ * Metodo para actualizar Lives Activos
+ */
+export async function updatedLive(selectedLive:any){
+  let myDocRef;
+
+  try {
+    //Actualizar un registro (update)
+
+    // Define the collection and document data
+    const myCollection = collection(firebase.db, 'lives');
+    const myDocumentData = {
+      estado: selectedLive.estado
+    };
+
+    // Define the document reference
+    myDocRef = doc(myCollection, selectedLive.id);
+
+    // Add or update the document
+    await setDoc(myDocRef, myDocumentData);
+
+    // Log a success message
+    console.log('Document added or updated successfully! - Lives');
+  } catch (e) {
+    console.log(e);
+  }
+  return myDocRef;
 }

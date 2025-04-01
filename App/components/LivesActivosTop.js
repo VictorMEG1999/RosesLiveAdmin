@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, FlatList, Modal, TextInput, Button } from "react-native";
-import { getLives } from "../controller/LivesController";
+import { getLives, updatedLive } from "../controller/LivesController";
 import styles from "../styles/InicioUsuarioTabStyles";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { Picker } from "@react-native-picker/picker";
 import { format } from "date-fns";
+import {updateUserData} from "../controller/RegistroUsuarioController";
 
 const LivesScreen = () => {
   const [Lives, setLives] = useState([]);
@@ -25,10 +26,32 @@ const LivesScreen = () => {
     setModalVisible(true); // Abrir el modal para editar
   };
 
-  const handleSaveUser = () => {
-    console.log("Guardar usuario:", selectedUser);
-    // Aquí puedes agregar la lógica para guardar el usuario editado
-    setModalVisible(false);
+  const handleSaveUser = async() => {
+      const doc = await updatedLive(selectedUser);
+      console.log("Actualizacion exitosa: ", doc.id);
+
+      //Renderizar los datos en la lista
+      const newData = Lives.map(row => {
+          if (row.id === selectedUser.id) {
+              // Actualiza con los nuevo datos
+              return {
+                  ...row,
+                  channelName: selectedUser.channelName,
+                  createdAt: selectedUser.createdAt,
+                  //creator: selectedUser.creator,
+                  estado: selectedUser.estado,
+                  id: selectedUser.id,
+              };
+          }
+          return row; // No cambia para los demas datos
+      });
+
+      const dataFinal = newData.filter((x) => x.estado !== false); //no se muestran los inactivos
+
+      // Vuelve a renderizar con el nuevo _array_
+      setLives(dataFinal);
+
+      setModalVisible(false);
   };
 
  const renderItem = ({ item }) => (
@@ -86,11 +109,13 @@ const formatDate = (date) => {
           <View style={styles.modalContent}>
             <TextInput
               style={styles.input}
+              editable={false}
               value={selectedUser?.channelName}
               onChangeText={(text) => setSelectedUser({ ...selectedUser, channelname: text })}
             />
            <TextInput
              style={styles.input}
+             editable={false}
              value={selectedUser?.createdAt ? formatDate(selectedUser.createdAt) : ""}
              onChangeText={(text) =>
                setSelectedUser({

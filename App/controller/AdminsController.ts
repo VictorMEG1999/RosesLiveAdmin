@@ -1,5 +1,5 @@
 import firebase from "./firebase";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, doc, setDoc } from "firebase/firestore";
 
 export async function getAdmins(activos = true) {
   let admins = [];
@@ -31,4 +31,38 @@ export async function getAdmins(activos = true) {
   }
 
   return admins;
+}
+
+/**
+ *
+ * @param selectedUser
+ * Metodo para actualizar Usuarios Admin
+ */
+export async function updateUserAdmin(selectedAdmin:any){
+  let myDocRef;
+
+  try {
+    //Actualizar un registro (update)
+
+    // Define the collection and document data
+    const myCollection = collection(firebase.db, 'admin');
+    const myDocumentData = {
+      email: selectedAdmin.email,
+      estado: selectedAdmin.estado,
+      nombre: selectedAdmin.nombre,
+      permiso: selectedAdmin.permiso
+    };
+
+    // Define the document reference
+    myDocRef = doc(myCollection, selectedAdmin.id);
+
+    // Add or update the document
+    await setDoc(myDocRef, myDocumentData);
+
+    // Log a success message
+    console.log('Document added or updated successfully! - Admin');
+  } catch (e) {
+    console.log(e);
+  }
+  return myDocRef;
 }

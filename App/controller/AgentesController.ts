@@ -1,5 +1,5 @@
 import firebase from "./firebase";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, doc, setDoc } from "firebase/firestore";
 
 export async function getAgentes(activos = true) {
   let agentes = [];
@@ -32,4 +32,39 @@ export async function getAgentes(activos = true) {
   }
 
   return agentes;
+}
+
+/**
+ *
+ * @param nombre
+ * Metodo para actualizar Agentes Activos
+ */
+export async function updateAgentesActivos(selectedAgentes:any){
+  let myDocRef;
+
+  try {
+    //Actualizar un registro (update)
+
+    // Define the collection and document data
+    const myCollection = collection(firebase.db, 'agentes');
+    const myDocumentData = {
+      email: selectedAgentes.email,
+      estado: selectedAgentes.estado,
+      nickName: selectedAgentes.nickName,
+      nombre: selectedAgentes.nombre,
+      verificado: selectedAgentes.verificado
+    };
+
+    // Define the document reference
+    myDocRef = doc(myCollection, selectedAgentes.id);
+
+    // Add or update the document
+    await setDoc(myDocRef, myDocumentData);
+
+    // Log a success message
+    console.log('Document added or updated successfully! - Agentes');
+  } catch (e){
+    console.log(e);
+  }
+  return myDocRef;
 }

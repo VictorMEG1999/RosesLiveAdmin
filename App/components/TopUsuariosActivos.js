@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, FlatList, Modal, TextInput, Button } from "react-native";
+import { View, Text, FlatList, Modal, TextInput, Button } from "react-native";
 import { getUsuarios } from "../controller/UsuariosController";
 import styles from "../styles/InicioUsuarioTabStyles";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { Picker } from "@react-native-picker/picker";
+import { updateUserData} from '../controller/RegistroUsuarioController';
 
 const UsuariosScreen = () => {
   const [usuarios, setUsuarios] = useState([]);
@@ -24,10 +25,33 @@ const UsuariosScreen = () => {
     setModalVisible(true); // Abrir el modal para editar
   };
 
-  const handleSaveUser = () => {
-    console.log("Guardar usuario:", selectedUser);
-    // Aquí puedes agregar la lógica para guardar el usuario editado
-    setModalVisible(false);
+  const handleSaveUser = async () => {
+      const doc = await updateUserData(selectedUser);
+      console.log("Actualizacion exitosa: ", doc.id);
+
+      //Renderizar los datos en la lista
+      const newData = usuarios.map(row => {
+          if (row.id === selectedUser.id) {
+              // Actualiza con los nuevo datos
+              return {
+                  ...row,
+                  email: selectedUser.email,
+                  estado: selectedUser.estado,
+                  id: selectedUser.id,
+                  nickName: undefined,
+                  nombre: selectedUser.nombre,
+                  verificado: undefined
+              };
+          }
+          return row; // No cambia para los demas datos
+      });
+
+      const dataFinal = newData.filter((x) => x.estado !== false); //no se muestran los inactivos
+
+      // Vuelve a renderizar con el nuevo _array_
+      setUsuarios(dataFinal);
+
+      setModalVisible(false);
   };
 
  const renderItem = ({ item }) => (

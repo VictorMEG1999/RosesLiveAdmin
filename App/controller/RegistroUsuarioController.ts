@@ -1,5 +1,6 @@
 import firebase from "./firebase"
-import { collection , query, where, getDocs, addDoc } from "firebase/firestore";
+import {collection, query, where, getDocs, addDoc, doc, setDoc} from "firebase/firestore";
+
 export const checTex =  (text: String, type:String) =>{
   
   // validacion y texto
@@ -110,3 +111,37 @@ export async function search (campo: string,valorvalue: string) {
       });
       return docRef 
   }
+
+/**
+ *
+ * @param selectedUser
+ * Metodo para actualizar Usuarios Activos
+ */
+export async function updateUserData(selectedUser:any){
+    let myDocRef;
+
+    try {
+        //Actualizar un registro (update)
+
+        // Define the collection and document data
+        const myCollection = collection(firebase.db, 'usuario');
+        const myDocumentData = {
+            nombre: selectedUser.nombre,
+            email: selectedUser.email,
+            estado: selectedUser.estado
+        };
+
+        // Define the document reference
+        myDocRef = doc(myCollection, selectedUser.id);
+
+        // Add or update the document
+        await setDoc(myDocRef, myDocumentData);
+
+        // Log a success message
+        console.log('Document added or updated successfully! - Usuario');
+
+    } catch (e) {
+        console.log(e);
+    }
+    return myDocRef;
+}
